@@ -1,23 +1,27 @@
-# Atividades extras · Fisiologia
+# Atividades extras
 
-Missões em equipe para sala de aula (estações + chaves), ligadas aos simuladores de [Fisiologia Interativa](https://drmarionascimento.github.io/fisiologia-interativa/).
+Uma **pasta por disciplina**. A publicação é sempre a branch `main` (GitHub Pages).
 
-Branch de trabalho: [`Fisiologia`](https://github.com/DrMarioNascimento/Atividades-Extras/tree/Fisiologia).
+```
+Atividades-Extras/
+  index.html              ← porta de todas as disciplinas
+  README.md
+  fisiologia/             ← só extras de Fisiologia
+    index.html
+    Operacao-Alveolo-Seguro.html
+    Operacao-Alveolo-Seguro-sem-cronometro.html
+  etica/                  ← quando houver
+  pesquisa/               ← quando houver
+```
 
-Não substitui os escape rooms online de [Fisiologia em Fuga](https://drmarionascimento.github.io/fisiologia-em-fuga/). Aqui ficam as operações de grupo, com ou sem cronômetro.
+Não use uma branch com o nome da disciplina. Branch `Fisiologia` parece pasta no GitHub, mas o site lê a `main`.
 
-## No ar
+## Fisiologia
 
-- [Índice](https://drmarionascimento.github.io/Atividades-Extras/)
-- [Operação Alvéolo Seguro](https://drmarionascimento.github.io/Atividades-Extras/Operacao-Alveolo-Seguro.html) — com cronômetro e som
-- [Operação Alvéolo Seguro · sem cronômetro](https://drmarionascimento.github.io/Atividades-Extras/Operacao-Alveolo-Seguro-sem-cronometro.html) — ensaio
+- [Pasta](https://drmarionascimento.github.io/Atividades-Extras/fisiologia/)
+- [Alvéolo Seguro](https://drmarionascimento.github.io/Atividades-Extras/fisiologia/Operacao-Alveolo-Seguro.html)
+- [Alvéolo Seguro sem cronômetro](https://drmarionascimento.github.io/Atividades-Extras/fisiologia/Operacao-Alveolo-Seguro-sem-cronometro.html)
 
-## Como cada missão se organiza
+Missões novas desta matéria entram em `fisiologia/`. Outra disciplina = pasta nova no mesmo nível (`etica/`, `pesquisa/`…).
 
-- Uma operação = um tema dos simuladores atuais
-- Número de estações livre (2 a 6) + chave final opcional
-- Duas versões quando fizer sentido: com relógio / sem relógio
-- Gabarito só no `CONFIG` no final do HTML
-- EF e Fisio podem compartilhar o casco e mudar o enunciado da última estação
-
-Autor: Mário César Nascimento. Uso educacional.
+Autor: Mário César Nascimento.
