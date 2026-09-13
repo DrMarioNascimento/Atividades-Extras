@@ -11,35 +11,29 @@ main{max-width:860px;margin:0 auto;padding:48px 22px 64px}
 .eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 h1{font-weight:550;letter-spacing:-.04em;font-size:clamp(1.8rem,4vw,2.6rem);margin:.4rem 0 0}
 h1 span{color:var(--cyan)}
-.lead{color:var(--muted);max-width:38rem}
-.grid{display:grid;gap:16px;margin-top:32px}
-article{border:1px solid var(--line);border-radius:16px;padding:20px 22px;background:linear-gradient(160deg,#152633bb,#0d1923ed)}
-article h2{margin:0 0 8px;font-size:1.15rem;font-weight:550}
-article p{margin:0 0 14px;color:var(--muted);font-size:.92rem}
-.actions{display:flex;flex-wrap:wrap;gap:10px}
-a{color:inherit;text-decoration:none}
-.btn{display:inline-flex;align-items:center;min-height:42px;padding:0 14px;border-radius:8px;border:1px solid #a4fff144;background:linear-gradient(#79efdb,#4fcdbb);color:#072a2a;font-size:13px;font-weight:700}
-.ghost{background:#13212a;border:1px solid var(--line);color:var(--text)}
-footer{margin-top:40px;color:#718996;font-size:12px}
+.lead{color:var(--muted);max-width:40rem}
+.grid{display:grid;gap:14px;margin-top:28px}
+article{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:linear-gradient(160deg,#152633bb,#0d1923ed)}
+article h2{margin:0 0 6px;font-size:1.08rem}
+article p{margin:0 0 12px;color:var(--muted);font-size:.9rem}
+a.btn{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:8px;border:1px solid #a4fff144;background:linear-gradient(#79efdb,#4fcdbb);color:#072a2a;font-size:13px;font-weight:700;text-decoration:none}
+footer{margin-top:36px;color:#718996;font-size:12px}
 </style>
 </head>
 <body>
 <main>
-<p class="eyebrow"><a href="../">Atividades extras</a> · Fisiologia</p>
+<p class="eyebrow"><a href="../" style="color:inherit;text-decoration:none">Atividades extras</a> · Fisiologia</p>
 <h1>Operações de <span>sala</span></h1>
-<p class="lead">Só o que é extra de Fisiologia. Cada missão nova desta disciplina entra nesta pasta.</p>
+<p class="lead">Cada missão usa os simuladores da unidade. Inicie o cronômetro (padrão 20 min), abra as estações e feche com a chave final.</p>
 <div class="grid">
-<article>
-<p class="eyebrow">Sistema respiratório</p>
-<h2>Operação Alvéolo Seguro</h2>
-<p>Três estações (mecânica, zonas de West, curva da Hb) e a equação de mistura no fechamento.</p>
-<div class="actions">
-<a class="btn" href="Operacao-Alveolo-Seguro.html">Com cronômetro ↗</a>
-<a class="btn ghost" href="Operacao-Alveolo-Seguro-sem-cronometro.html">Sem cronômetro</a>
+<article><p class="eyebrow">Respiratório</p><h2>Operação Alvéolo Seguro</h2><p>Mecânica, zonas de West, curva da Hb e volume alveolar.</p><a class="btn" href="Operacao-Alveolo-Seguro.html">Abrir ↗</a></article>
+<article><p class="eyebrow">Celular</p><h2>Operação Membrana Sitiada</h2><p>Potencial de repouso, SGLT e osmose.</p><a class="btn" href="Operacao-Membrana-Sitiada.html">Abrir ↗</a></article>
+<article><p class="eyebrow">Muscular</p><h2>Operação Unidade Motora</h2><p>Acoplamento E–C, isométrica e recrutamento.</p><a class="btn" href="Operacao-Unidade-Motora.html">Abrir ↗</a></article>
+<article><p class="eyebrow">Osteoarticular · só EF</p><h2>Operação Matriz Óssea</h2><p>PTH, Lei de Wolff e osteoclastos.</p><a class="btn" href="Operacao-Matriz-Ossea.html">Abrir ↗</a></article>
+<article><p class="eyebrow">Cardiovascular</p><h2>Operação Circuito Fechado</h2><p>PAM = DC × RPT, Poiseuille e ortostase.</p><a class="btn" href="Operacao-Circuito-Fechado.html">Abrir ↗</a></article>
+<article><p class="eyebrow">Integração</p><h2>Operação Fick em Campo</h2><p>Equação de Fick, curva da Hb e limite do VO₂.</p><a class="btn" href="Operacao-Fick-em-Campo.html">Abrir ↗</a></article>
 </div>
-</article>
-</div>
-<footer>Próximas nesta pasta: celular, muscular, ósseo, cardiovascular e integração.</footer>
+<footer>Gabarito no CONFIG de cada HTML.</footer>
 </main>
 </body>
 </html>
