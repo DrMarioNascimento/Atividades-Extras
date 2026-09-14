@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="sim-kind" content="operacao-sala"><meta name="sim-timer" content="nao">
+<title>Operação Unidade Motora · sem cronômetro</title>
+<style>body{margin:0;background:#070e15;color:#e8f3f6;font:16px Inter,Arial,sans-serif}.app{max-width:880px;margin:auto;padding:24px}.panel{border:1px solid #2a4150;border-radius:14px;padding:16px;background:#101e29;margin:12px 0}.primary{background:linear-gradient(#79efdb,#4fcdbb);border:0;padding:10px 14px;border-radius:8px}.ghost{background:#13212a;color:#e8f3f6;border:1px solid #2a4150;padding:10px 14px;border-radius:8px}.entry{display:flex;gap:8px}input{flex:1;padding:10px;border-radius:8px;background:#060f18;color:#e8f3f6;border:1px solid #3c5464}footer{color:#718996;font-size:12px}</style></head>
+<body><div class="app"><p><a href="./" style="color:#91a6b5">Operações de sala</a></p><h1>A fibra espera o comando.</h1>
+<article class="panel station" id="stationA"><h2>Estação A</h2><form data-station="A"><div class="entry"><input id="codeA"><button class="primary">Validar</button></div><p id="feedbackA"></p></form></article>
+<article class="panel station" id="stationB"><h2>Estação B</h2><form data-station="B"><div class="entry"><input id="codeB"><button class="primary">Validar</button></div><p id="feedbackB"></p></form></article>
+<article class="panel station" id="stationC"><h2>Estação C</h2><form data-station="C"><div class="entry"><input id="codeC"><button class="primary">Validar</button></div><p id="feedbackC"></p></form></article>
+<p>Progresso <b id="progress">00 / 03</b></p>
+<section class="panel" id="final-wrap" hidden><form id="final-form" class="entry"><input id="final-code"><button class="primary">Restaurar</button></form><p id="final-fb"></p></section>
+<p><button class="ghost" id="reset">Reiniciar missão</button></p>
+<footer>Simuladores interativos utilizados nas disciplinas de Fisiologia Humana do Prof. Dr. Mário César Nascimento ©</footer></div>
+<dialog id="success"><h2>Você está preparado para a avaliação!</h2><form method="dialog"><button class="primary">Fechar</button></form></dialog>
+<script>
+const CONFIG={codes:{A:'CA',B:'ISO',C:'TAMANHO'},finalCode:'HILL'};
+const solved=new Set();let complete=false;const $=id=>document.getElementById(id);const n=v=>String(v||'').trim().toUpperCase();
+function up(){$('progress').textContent=String(solved.size).padStart(2,'0')+' / 03';$('final-wrap').hidden=solved.size!==3;}
+document.querySelectorAll('[data-station]').forEach(f=>f.addEventListener('submit',ev=>{ev.preventDefault();const k=f.dataset.station;if(complete||solved.has(k))return;if(n($('code'+k).value)!==CONFIG.codes[k]){$('feedback'+k).textContent='Chave não reconhecida.';return;}solved.add(k);$('feedback'+k).textContent='Validada.';up();}));
+$('final-form').addEventListener('submit',ev=>{ev.preventDefault();if(solved.size!==3||complete)return;if(n($('final-code').value)!==CONFIG.finalCode){$('final-fb').textContent='Chave final não reconhecida.';return;}complete=true;$('success').showModal();});
+$('reset').onclick=()=>location.reload();up();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="gate-google.js"></script>
+<script src="firebase-ops.js"></script>
+</body></html>
