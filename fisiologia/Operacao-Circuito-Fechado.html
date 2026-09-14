@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070e15">
+<meta name="sim-category" content="cardiovascular">
+<meta name="sim-course" content="ef,fisio">
+<meta name="sim-kind" content="operacao-sala">
+<meta name="description" content="Operação de sala — cardiovascular.">
+<title>Operação CIRCUITO FECHADO · Escape room</title>
+<style>
+:root{color-scheme:dark;--bg:#070e15;--panel:#101e29;--muted:#91a6b5;--text:#e8f3f6;--cyan:#65ead8;--orange:#ffb478;--red:#ff827e;--line:rgba(157,201,218,.14);font-family:Inter,Segoe UI,Arial,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 52% 10%,#18303966,transparent 60%),var(--bg);color:var(--text);min-height:100vh}
+button,input{font:inherit}button{cursor:pointer;color:inherit}button:disabled{opacity:.45;cursor:not-allowed}
+button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--cyan);outline-offset:4px}
+.eyebrow{font-size:10px;letter-spacing:2.2px;font-weight:600;text-transform:uppercase;color:var(--muted)}
+.app{max-width:1180px;margin:auto;padding:24px 22px 18px}
+.topbar{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:18px;gap:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;letter-spacing:2px}
+.brand-icon{width:35px;height:35px;border:1px solid #65ead854;border-radius:10px;display:grid;place-items:center;color:var(--cyan);background:#65ead808;font-size:20px}
+.brand small{display:block;font-size:9px;letter-spacing:2.2px;color:var(--muted);margin-top:4px}
+.ghost{background:#13212a;border:1px solid var(--line);border-radius:8px;padding:10px 13px;font-size:11px;min-height:44px}
+.ghost:hover{background:#223440}
+.intro{display:flex;justify-content:space-between;align-items:end;margin:28px 0 18px;gap:16px;flex-wrap:wrap}
+h1{font-size:clamp(24px,3vw,40px);font-weight:500;letter-spacing:-1.4px;margin:8px 0}h1 span{color:var(--cyan)}
+.intro p{margin:0;color:var(--muted);font-size:13px;line-height:1.7}
+.alert{display:flex;align-items:center;gap:14px;border:1px solid #ffb47835;background:linear-gradient(90deg,#ffb47810,#ffb47803);padding:14px 18px;border-radius:9px;margin-bottom:18px}
+.alert strong{font-size:12px;color:var(--orange)} .alert p{font-size:11px;margin:4px 0 0;color:#beaa9b}
+.panel{border:1px solid var(--line);background:linear-gradient(135deg,#152633bb,#0d1923ed);border-radius:15px}
+.mission-console{display:flex;align-items:center;gap:22px;padding:16px 20px;margin-bottom:18px;flex-wrap:wrap}
+.timer-display{font:40px Consolas,monospace;letter-spacing:2px;color:var(--cyan)}
+.timer-state{font-size:10px;color:var(--muted);margin-top:4px}
+.timer-track{height:3px;background:#2a3d48;border-radius:3px;overflow:hidden;margin-top:8px;width:160px}
+.timer-fill{height:100%;background:var(--cyan);width:100%}
+.urgent .timer-display,.urgent .timer-fill{color:var(--red);background:var(--red)}
+.timer-controls,.audio-controls{display:flex;gap:8px;align-items:end;flex-wrap:wrap}
+.duration-label,.volume-label{display:flex;flex-direction:column;gap:6px;font-size:10px;color:var(--muted)}
+.duration-label input{width:80px;border:1px solid #44606d;border-radius:7px;background:#07131b;padding:10px;color:var(--text);font:14px Consolas,monospace}
+.stations{display:grid;gap:14px}
+.station{padding:18px 20px;--accent:var(--cyan)}
+.station.b{--accent:#8bbaff}.station.c{--accent:var(--orange)}.station.d{--accent:#c4b5fd}
+.station-head{display:flex;align-items:center;gap:11px}
+.station-letter{width:30px;height:32px;display:grid;place-items:center;border-radius:8px;color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 28%,transparent);background:color-mix(in srgb,var(--accent) 7%,transparent);font:14px Consolas,monospace}
+.station-head h3{font-size:14px;font-weight:500;margin:0 0 4px}
+.station-head p{font-size:11px;margin:0;color:var(--muted)}
+.station-status{margin-left:auto;font:9px Consolas,monospace;color:var(--muted);letter-spacing:1px}
+.station-body{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:center;margin-top:12px}
+.chart{width:100%;height:auto}
+.chart text{fill:#839eac;font:9px Consolas,monospace}
+.code-area label{font-size:10px;color:#b2c5d0;display:block;margin-bottom:8px}
+.entry{display:flex;gap:7px}
+.entry input{width:100%;border:1px solid #3c5464;background:#060f18b0;color:var(--text);border-radius:7px;padding:10px 12px;text-transform:uppercase;font:14px Consolas,monospace;letter-spacing:2px}
+.entry button{border:1px solid #3c5464;background:#1b303c;border-radius:7px;width:42px;min-height:44px;font-size:18px}
+.feedback{font-size:10px;min-height:16px;margin:7px 0 0;color:var(--muted)}
+.feedback.error{color:var(--red)}
+.station.solved{border-color:#65ead84d}
+.station.solved .station-status,.station.solved .feedback{color:var(--cyan)}
+details{font-size:12px;color:#b2c5d0;border-top:1px solid var(--line);margin-top:10px;padding-top:8px}
+summary{cursor:pointer;color:var(--muted);font-size:10px}
+details p{margin:8px 0 0;line-height:1.6}
+.bottom{display:grid;grid-template-columns:.8fr 1.2fr;gap:14px;margin-top:16px}
+.progress-panel,.final-panel{padding:18px 20px}
+.segments{display:flex;gap:6px;margin:14px 0}
+.segment{height:4px;flex:1;border-radius:4px;background:#2a3d48}
+.segment.done{background:var(--cyan)}
+.final-form{display:none;gap:8px;margin-top:10px;flex-wrap:wrap}
+.unlocked .final-form{display:flex}
+.final-form input{width:140px;border:1px solid #44636c;background:#07131b;border-radius:7px;padding:10px;color:var(--text);font:13px Consolas,monospace;letter-spacing:2px}
+.primary{border:1px solid #a4fff144;background:linear-gradient(#79efdb,#4fcdbb);color:#072a2a;font-size:11px;font-weight:700;padding:11px 16px;border-radius:7px;min-height:44px}
+.final-copy h2{font-size:14px;font-weight:500;margin:0 0 6px}
+.final-copy p{font-size:12px;color:var(--muted);margin:0;line-height:1.5}
+footer{display:flex;justify-content:space-between;gap:12px;padding:18px 0 4px;color:#718996;font-size:10px;flex-wrap:wrap}
+footer a,footer button{background:none;border:0;color:#91a6b5;font-size:10px;text-decoration:underline}
+.modal{border:1px solid #44606d;border-radius:16px;background:linear-gradient(145deg,#182d39,#0b1822);color:var(--text);max-width:540px;width:calc(100% - 32px);padding:26px}
+.modal::backdrop{background:#02080dc9}
+.modal h2{font-weight:500;font-size:24px;margin:10px 0}
+.modal p,.modal li{font-size:13px;line-height:1.7;color:#adc0cc}
+.modal .actions{display:flex;justify-content:end;gap:10px;margin-top:18px;flex-wrap:wrap}
+.success{text-align:center}
+.success-orb{margin:0 auto 18px;width:78px;height:78px;border-radius:50%;background:radial-gradient(circle at 35% 25%,#baffed,#43a99a 45%,#113a39 75%);display:grid;place-items:center;font-size:34px;color:#082a24}
+.sound-switch{display:flex;align-items:center;gap:10px;border:0;background:transparent;font-size:11px;min-height:44px}
+.switch-track{width:48px;height:28px;border-radius:20px;background:#3a4650;position:relative}
+.switch-track:after{content:'';position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:transform .2s}
+.sound-switch[aria-checked="true"] .switch-track{background:#34c759}
+.sound-switch[aria-checked="true"] .switch-track:after{transform:translateX(18px)}
+@media(max-width:800px){.station-body,.bottom{grid-template-columns:1fr}.timer-display{font-size:32px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <div class="brand"><div class="brand-icon" aria-hidden="true">✳</div><span>CIRCUITO FECHADO<small>LABORATÓRIO DE FISIOLOGIA</small></span></div>
+  <div><button class="ghost" id="help">Como jogar ↗</button></div>
+</header>
+<section class="intro">
+  <div><div class="eyebrow">Escape room / Sistema cardiovascular</div><h1>Pressão é <span>produto.</span></h1><p>PAM, raio do vaso e retorno venoso — o mesmo trio dos simuladores de PA–DC–RPT, Poiseuille e coluna de sangue.</p></div>
+  <div class="eyebrow">MISSÃO 05 / CIRCUITO</div>
+</section>
+<div class="alert" id="alert"><div><strong>O circuito perdeu a conta. Recoloque pressão, resistência e retorno no lugar.</strong><p>Valide as estações e a chave final. Base: simuladores da unidade.</p></div></div>
+<section class="panel mission-console" id="mission-console">
+  <div><div class="eyebrow">Tempo restante</div><div id="timer-display" class="timer-display">20:00</div><div class="timer-track"><div class="timer-fill" id="timer-fill"></div></div><div class="timer-state" id="timer-state">Aguardando início</div></div>
+  <div class="timer-controls">
+    <label class="duration-label">Duração · min<input id="duration" type="number" min="1" max="60" value="20"></label>
+    <button class="primary" id="timer-start">Iniciar missão ↗</button>
+    <button class="ghost" id="timer-pause" hidden>Pausar tempo</button>
+  </div>
+  <div class="audio-controls">
+    <button class="sound-switch" id="sound-toggle" role="switch" aria-checked="false"><span id="sound-state">Som desligado</span><span class="switch-track"></span></button>
+    <label class="volume-label">Volume<input id="volume" type="range" min="0" max="100" value="25"></label>
+  </div>
+  <p id="timer-message" class="eyebrow" style="width:100%;normal-case:none;letter-spacing:0;text-transform:none">Defina a duração e inicie. Sem iniciar, as chaves não entram.</p>
+</section>
+<section class="stations"><article class="panel station " id="stationA">
+<div class="station-head"><span class="station-letter">A</span><div><h3>Pressão arterial média</h3><p>PAM = DC × RPT</p></div><span class="station-status">○ PENDENTE</span></div>
+<div class="station-body"><svg class="chart" viewBox="0 0 280 120" role="img"><text x="24" y="40">PAM</text><text x="70" y="40">=</text><text x="96" y="40">DC</text><text x="140" y="40">×</text><text x="168" y="40">RPT</text><rect x="20" y="60" width="70" height="36" rx="6" fill="#ff827e22" stroke="#ff827e"/><rect x="110" y="60" width="60" height="36" rx="6" fill="#65ead822" stroke="#65ead8"/><rect x="190" y="60" width="60" height="36" rx="6" fill="#8bbaff22" stroke="#8bbaff"/></svg>
+<form class="code-area" data-station="A"><label for="codeA">Chave da estação A</label>
+<div class="entry"><input id="codeA" maxlength="18" placeholder="••••" autocomplete="off" spellcheck="false"><button type="submit" aria-label="Validar">↗</button></div>
+<p class="feedback" id="feedbackA">Insira a chave encontrada.</p></form></div>
+<details><summary>Consultar pista fisiológica</summary><p>Sobe o débito ou a resistência periférica total, sobe a PAM — se o outro termo não compensar.</p></details>
+</article>
+<article class="panel station b" id="stationB">
+<div class="station-head"><span class="station-letter">B</span><div><h3>Poiseuille</h3><p>O raio manda na resistência</p></div><span class="station-status">○ PENDENTE</span></div>
+<div class="station-body"><svg class="chart" viewBox="0 0 280 120" role="img"><text x="20" y="32">R ∝ 1 / r⁴</text><path d="M30 100 Q80 90 110 40" stroke="#ff827e" fill="none" stroke-width="2"/><text x="118" y="44" style="fill:#ff827e">raio ↑  resistência ↓↓↓</text><circle cx="60" cy="78" r="8" fill="none" stroke="#65ead8"/><circle cx="200" cy="70" r="18" fill="none" stroke="#65ead8"/></svg>
+<form class="code-area" data-station="B"><label for="codeB">Chave da estação B</label>
+<div class="entry"><input id="codeB" maxlength="18" placeholder="••••" autocomplete="off" spellcheck="false"><button type="submit" aria-label="Validar">↗</button></div>
+<p class="feedback" id="feedbackB">Insira a chave encontrada.</p></form></div>
+<details><summary>Consultar pista fisiológica</summary><p>Dobrar o raio não divide a resistência por dois: divide por dezesseis. É o recado do simulador de Poiseuille.</p></details>
+</article>
+<article class="panel station c" id="stationC">
+<div class="station-head"><span class="station-letter">C</span><div><h3>Ortostase</h3><p>A coluna de sangue</p></div><span class="station-status">○ PENDENTE</span></div>
+<div class="station-body"><svg class="chart" viewBox="0 0 280 120" role="img"><rect x="120" y="16" width="16" height="90" fill="#65ead822" stroke="#65ead8"/><text x="148" y="36">deitado → coluna curta</text><text x="148" y="78" style="fill:#ffb478">em pé → coluna longa</text></svg>
+<form class="code-area" data-station="C"><label for="codeC">Chave da estação C</label>
+<div class="entry"><input id="codeC" maxlength="18" placeholder="••••" autocomplete="off" spellcheck="false"><button type="submit" aria-label="Validar">↗</button></div>
+<p class="feedback" id="feedbackC">Insira a chave encontrada.</p></form></div>
+<details><summary>Consultar pista fisiológica</summary><p>Em pé o sangue desce para as pernas, o retorno venoso cai, o DC tende a cair — até o reflexo compensar.</p></details>
+</article></section>
+<div class="bottom">
+  <section class="panel progress-panel">
+    <div style="display:flex;justify-content:space-between;font-size:11px"><span>Progresso</span><strong id="progress-count" style="color:var(--cyan);font-family:Consolas,monospace">00 / 03</strong></div>
+    <div class="segments" id="progress" role="progressbar" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0"><span class="segment"></span><span class="segment"></span><span class="segment"></span></div>
+    <p id="progress-copy" style="font-size:11px;color:var(--muted);margin:0">Cada chave recupera uma etapa.</p>
+  </section>
+  <section class="panel final-panel" id="final">
+    <div class="final-copy">
+      <div class="eyebrow" style="margin-bottom:6px">Etapa final</div>
+      <h2 id="final-title">Restauração bloqueada</h2>
+      <p id="final-copy">Valide as estações para a chave final.</p>
+      <form class="final-form" id="final-form">
+        <label class="eyebrow" style="width:100%">Estação D · O que é o débito</label>
+        <input id="final-code" maxlength="18" placeholder="••••" autocomplete="off">
+        <button class="primary" id="restore" type="submit">Restaurar ↗</button>
+      </form>
+      <p id="final-feedback" class="feedback"></p>
+    </div>
+  </section>
+</div>
+<footer>
+  <span>AMBIENTE EDUCACIONAL · SEM USO CLÍNICO · <a href="./">Voltar às operações</a></span>
+  <span><button id="reset">Reiniciar missão</button></span>
+</footer>
+</div>
+<dialog class="modal" id="help-dialog">
+  <div class="eyebrow">Briefing</div>
+  <h2>Como jogar</h2>
+  <p>Inicie o cronômetro. Cada estação pede uma chave ligada ao simulador da unidade. A pista é opcional. Com todas validadas, entre a chave final.</p>
+  <div class="actions"><button class="primary" data-close>Entendido ↗</button></div>
+</dialog>
+<dialog class="modal" id="reset-dialog">
+  <h2>Reiniciar a missão?</h2>
+  <p>As chaves validadas serão apagadas.</p>
+  <div class="actions"><button class="ghost" data-close>Continuar</button><button class="primary" id="confirm-reset">Reiniciar</button></div>
+</dialog>
+<dialog class="modal success" id="success-dialog">
+  <div class="success-orb">✓</div>
+  <div class="eyebrow">Protocolo concluído</div>
+  <h2>Você está preparado para a avaliação!</h2>
+  <p>O circuito fechou de novo. Pressão, raio e retorno voltaram a conversar.</p>
+  <div class="actions" style="justify-content:center"><button class="primary" data-close>Voltar ao painel ↗</button></div>
+</dialog>
+<dialog class="modal" id="timeout-dialog">
+  <h2>Tempo esgotado.</h2>
+  <p>As respostas foram preservadas.</p>
+  <div class="actions"><button class="ghost" id="timeout-dismiss">Ver painel</button><button class="primary" id="timeout-extend">+5 minutos</button></div>
+</dialog>
+<script>
+'use strict';
+const CONFIG = {"codes": {"A": "PAM", "B": "R4", "C": "ORTO"}, "finalCode": "DEBITO", "finalHint": "PAM = ? × ?. Em Poiseuille a resistência cai com o raio em que potência? Ao ficar em pé, o retorno venoso faz o quê? A chave final é DC = FC × VS, em uma palavra.", "timerResetPassword": "Monitor2026"};
+const solved = new Set();
+let complete = false;
+const $ = id => document.getElementById(id);
+const normalize = v => String(v||'').trim().toUpperCase();
+const letters = Object.keys(CONFIG.codes);
+function updateProgress(){
+  const n = solved.size, tot = letters.length;
+  $('progress-count').textContent = String(n).padStart(2,'0')+' / '+String(tot).padStart(2,'0');
+  $('progress').setAttribute('aria-valuenow', String(n));
+  document.querySelectorAll('.segment').forEach((el,i)=>el.classList.toggle('done', i<n));
+  const unlocked = n===tot;
+  $('final').classList.toggle('unlocked', unlocked);
+  $('final-code').disabled = !unlocked || complete || timerState!=='running';
+  $('restore').disabled = !unlocked || complete || timerState!=='running';
+  $('final-title').textContent = complete ? 'Protocolo concluído' : unlocked ? 'Chave final liberada' : 'Restauração bloqueada';
+  $('final-copy').textContent = complete ? 'Todas as estações foram verificadas.' : unlocked ? CONFIG.finalHint : 'Valide as estações para acessar a chave final.';
+}
+document.querySelectorAll('[data-station]').forEach(form=>{
+  const key = form.dataset.station;
+  const input = $('code'+key), feedback = $('feedback'+key);
+  form.addEventListener('submit', ev=>{
+    ev.preventDefault();
+    if(!canAnswer() || solved.has(key)) return;
+    if(normalize(input.value)!==normalize(CONFIG.codes[key])){
+      feedback.textContent = input.value.trim() ? 'Chave não reconhecida. Revise a estação.' : 'Digite a chave para continuar.';
+      feedback.classList.add('error'); input.focus(); return;
+    }
+    solved.add(key);
+    $('station'+key).classList.add('solved');
+    $('station'+key).querySelector('.station-status').textContent = '✓ VERIFICADA';
+    feedback.classList.remove('error'); feedback.textContent = 'Chave validada.';
+    input.readOnly = true; form.querySelector('button').disabled = true;
+    updateProgress(); playCue('correct');
+  });
+});
+$('final-form').addEventListener('submit', ev=>{
+  ev.preventDefault();
+  if(!canAnswer() || solved.size!==letters.length || complete) return;
+  if(normalize($('final-code').value)!==normalize(CONFIG.finalCode)){
+    $('final-feedback').textContent = 'Chave final não reconhecida.';
+    $('final-feedback').classList.add('error'); return;
+  }
+  complete = true; finishTimer();
+  $('final-feedback').textContent = 'Restauração concluída.';
+  $('final-feedback').classList.remove('error');
+  updateProgress(); $('success-dialog').showModal();
+});
+$('help').onclick = ()=>$('help-dialog').showModal();
+$('reset').onclick = ()=>$('reset-dialog').showModal();
+document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>b.closest('dialog').close());
+$('confirm-reset').onclick = ()=>{
+  solved.clear(); complete=false;
+  document.querySelectorAll('[data-station]').forEach(form=>{
+    const key=form.dataset.station, input=$('code'+key);
+    form.reset(); input.readOnly=false; form.querySelector('button').disabled=false;
+    $('station'+key).classList.remove('solved');
+    $('station'+key).querySelector('.station-status').textContent='○ PENDENTE';
+    $('feedback'+key).textContent='Insira a chave encontrada.';
+    $('feedback'+key).classList.remove('error');
+  });
+  $('final-form').reset(); $('final-feedback').textContent='';
+  updateProgress(); resetTimer(); $('reset-dialog').close();
+};
+
+let timerState='idle', remainingMs=20*60000, allottedMs=remainingMs, deadline=0;
+let audioContext=null, masterGain=null, soundEnabled=false, nextBeep=0, warnedMinute=false;
+const formatTime = ms => { const s=Math.ceil(Math.max(0,ms)/1000); return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0'); };
+function tone(freq, dur=.12, delay=0){
+  if(!soundEnabled || !audioContext || audioContext.state!=='running') return;
+  const o=audioContext.createOscillator(), g=audioContext.createGain();
+  const t=audioContext.currentTime+delay;
+  o.frequency.value=freq; o.connect(g); g.connect(masterGain);
+  g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.8,t+.01); g.gain.exponentialRampToValueAtTime(.001,t+dur);
+  o.start(t); o.stop(t+dur+.02);
+}
+function playCue(kind){
+  if(kind==='success')[660,880,1100].forEach((f,i)=>tone(f,.28,i*.18));
+  else if(kind==='correct'){tone(740,.14); tone(990,.16,.15);}
+  else {tone(880,.14); tone(660,.18,.2);}
+}
+$('sound-toggle').onclick = async ()=>{
+  soundEnabled=!soundEnabled;
+  $('sound-toggle').setAttribute('aria-checked', String(soundEnabled));
+  $('sound-state').textContent = soundEnabled ? 'Som ligado' : 'Som desligado';
+  if(soundEnabled){
+    const Ctx=window.AudioContext||window.webkitAudioContext;
+    if(!audioContext){ audioContext=new Ctx(); masterGain=audioContext.createGain(); masterGain.connect(audioContext.destination); }
+    await audioContext.resume(); masterGain.gain.value=Number($('volume').value)/100*.18; tone(880);
+  }
+};
+$('volume').oninput = ()=>{ if(masterGain) masterGain.gain.value = soundEnabled ? Number($('volume').value)/100*.18 : 0; };
+function syncAnswerControls(){
+  const blocked = timerState!=='running' || complete;
+  letters.forEach(k=>{
+    $('code'+k).disabled = blocked;
+    document.querySelector('[data-station="'+k+'"] button').disabled = blocked || solved.has(k);
+  });
+  $('final-code').disabled = blocked || solved.size!==letters.length;
+  $('restore').disabled = blocked || solved.size!==letters.length;
+}
+function renderTimer(){
+  $('timer-display').textContent = formatTime(remainingMs);
+  $('timer-fill').style.width = Math.max(0, Math.min(100, remainingMs/allottedMs*100))+'%';
+  $('timer-state').textContent = {idle:'Aguardando início',running:'Missão em andamento',paused:'Tempo pausado',expired:'Prazo encerrado',finished:'Missão concluída'}[timerState];
+  $('mission-console').classList.toggle('urgent', remainingMs<=60000 && !['idle','finished'].includes(timerState));
+  $('duration').disabled = timerState!=='idle';
+  $('timer-start').hidden = timerState!=='idle';
+  $('timer-pause').hidden = !['running','paused'].includes(timerState);
+  $('timer-pause').textContent = timerState==='paused' ? 'Retomar missão' : 'Pausar tempo';
+}
+function readDuration(){
+  const m=Number($('duration').value);
+  return Number.isInteger(m)&&m>=1&&m<=60 ? m*60000 : null;
+}
+$('duration').oninput = ()=>{ if(timerState==='idle'){ const d=readDuration(); if(d){ remainingMs=allottedMs=d; renderTimer(); } } };
+$('timer-start').onclick = ()=>{
+  const d=readDuration(); if(d===null) return;
+  remainingMs=allottedMs=d; timerState='running'; deadline=Date.now()+remainingMs;
+  $('timer-message').textContent='Missão iniciada.';
+  renderTimer(); syncAnswerControls();
+};
+function checkDeadline(){ if(timerState==='running'){ remainingMs=Math.max(0,deadline-Date.now()); if(remainingMs===0) expireTimer(); } }
+function canAnswer(){ checkDeadline(); return timerState==='running' && !complete; }
+function expireTimer(){
+  timerState='expired'; remainingMs=0; renderTimer(); syncAnswerControls();
+  $('timer-message').textContent='Tempo esgotado. Use +5 min ou reinicie.';
+  $('timeout-dialog').showModal();
+}
+$('timer-pause').onclick = ()=>{
+  if(timerState==='running'){ checkDeadline(); timerState='paused'; $('timer-message').textContent='Pausado.'; }
+  else if(timerState==='paused'){ timerState='running'; deadline=Date.now()+remainingMs; $('timer-message').textContent='Retomada.'; }
+  renderTimer(); syncAnswerControls();
+};
+function extendTimer(){
+  if(timerState!=='expired') return;
+  $('timeout-dialog').close();
+  remainingMs=5*60000; allottedMs+=remainingMs; deadline=Date.now()+remainingMs; timerState='running';
+  renderTimer(); syncAnswerControls();
+}
+$('timeout-extend').onclick = extendTimer;
+$('timeout-dismiss').onclick = ()=>$('timeout-dialog').close();
+function finishTimer(){
+  timerState='finished'; renderTimer(); syncAnswerControls(); playCue('success');
+  $('timer-message').textContent='Concluída com '+formatTime(remainingMs)+' restantes.';
+}
+function resetTimer(){
+  timerState='idle'; remainingMs=allottedMs=readDuration()||20*60000; deadline=0;
+  $('timer-message').textContent='Defina a duração e inicie a missão.';
+  renderTimer(); syncAnswerControls();
+}
+setInterval(()=>{
+  checkDeadline();
+  if(timerState==='running'){
+    renderTimer();
+    if(remainingMs<=60000 && !warnedMinute){ warnedMinute=true; playCue('warning'); }
+  }
+}, 250);
+renderTimer(); syncAnswerControls(); updateProgress();
+</script>
+</body>
+</html>
