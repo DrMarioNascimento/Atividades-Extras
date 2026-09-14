@@ -11,31 +11,67 @@ main{max-width:860px;margin:0 auto;padding:48px 22px 64px}
 .eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 h1{font-weight:550;letter-spacing:-.04em;font-size:clamp(1.8rem,4vw,2.6rem);margin:.4rem 0 0}
 h1 span{color:var(--cyan)}
-.lead{color:var(--muted);max-width:40rem}
+.lead{color:var(--muted);max-width:42rem}
 .grid{display:grid;gap:14px;margin-top:28px}
-article{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:linear-gradient(160deg,#152633bb,#0d1923ed);display:grid;grid-template-columns:1fr 108px;gap:16px;align-items:center}
+article{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:linear-gradient(160deg,#152633bb,#0d1923ed)}
 article h2{margin:0 0 6px;font-size:1.08rem}
 article p{margin:0 0 12px;color:var(--muted);font-size:.9rem}
-a.btn{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:8px;border:1px solid #a4fff144;background:linear-gradient(#79efdb,#4fcdbb);color:#072a2a;font-size:13px;font-weight:700;text-decoration:none}
-.qr{width:96px;height:96px;border-radius:10px;background:#fff;padding:6px}
+.file{font:12px Consolas,monospace;color:#9bb3c0}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+a.btn,button.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:12px;border:1px solid #d8c9a8;background:linear-gradient(#fff8ea,#f3e6c8);color:#5a4630;font-size:14px;font-weight:700;text-decoration:none;box-shadow:0 4px 0 #c9b48a,0 8px 16px #0003;cursor:pointer}
+a.ghost,button.ghost{background:linear-gradient(#fffdf6,#efe4cc);color:#5a4630}
+#ops-login{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:18px 0 8px}
+#ops-status{color:var(--muted);font-size:13px}
 footer{margin-top:36px;color:#718996;font-size:12px}
-@media(max-width:640px){article{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <main>
 <p class="eyebrow"><a href="../" style="color:inherit;text-decoration:none">Atividades extras</a> · Fisiologia</p>
 <h1>Operações de <span>sala</span></h1>
-<p class="lead">O QR abre a missão. O Alvéolo já está no ar. As outras páginas entram quando os HTML forem enviados a esta pasta.</p>
-<div class="grid">
-<article><div><p class="eyebrow">Respiratório · no ar</p><h2>Operação Alvéolo Seguro</h2><p>Mecânica, zonas de West, curva da Hb.</p><a class="btn" href="../Operacao-Alveolo-Seguro.html">Abrir ↗</a></div><img class="qr" alt="QR Alvéolo" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fdrmarionascimento.github.io%2FAtividades-Extras%2FOperacao-Alveolo-Seguro.html"></article>
-<article><div><p class="eyebrow">Celular</p><h2>Operação Membrana Sitiada</h2><p>Potencial, SGLT e osmose.</p><a class="btn" href="Operacao-Membrana-Sitiada.html">Abrir ↗</a></div><img class="qr" alt="QR Membrana" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fdrmarionascimento.github.io%2FAtividades-Extras%2Ffisiologia%2FOperacao-Membrana-Sitiada.html"></article>
-<article><div><p class="eyebrow">Muscular</p><h2>Operação Unidade Motora</h2><p>E–C, isométrica e recrutamento.</p><a class="btn" href="Operacao-Unidade-Motora.html">Abrir ↗</a></div><img class="qr" alt="QR Motora" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fdrmarionascimento.github.io%2FAtividades-Extras%2Ffisiologia%2FOperacao-Unidade-Motora.html"></article>
-<article><div><p class="eyebrow">Osteoarticular · EF</p><h2>Operação Matriz Óssea</h2><p>PTH, Wolff e osteoclastos.</p><a class="btn" href="Operacao-Matriz-Ossea.html">Abrir ↗</a></div><img class="qr" alt="QR Matriz" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fdrmarionascimento.github.io%2FAtividades-Extras%2Ffisiologia%2FOperacao-Matriz-Ossea.html"></article>
-<article><div><p class="eyebrow">Cardiovascular</p><h2>Operação Circuito Fechado</h2><p>PAM, Poiseuille e ortostase.</p><a class="btn" href="Operacao-Circuito-Fechado.html">Abrir ↗</a></div><img class="qr" alt="QR Circuito" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fdrmarionascimento.github.io%2FAtividades-Extras%2Ffisiologia%2FOperacao-Circuito-Fechado.html"></article>
-<article><div><p class="eyebrow">Integração</p><h2>Operação Fick em Campo</h2><p>Fick, Hb e VO₂.</p><a class="btn" href="Operacao-Fick-em-Campo.html">Abrir ↗</a></div><img class="qr" alt="QR Fick" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fdrmarionascimento.github.io%2FAtividades-Extras%2Ffisiologia%2FOperacao-Fick-em-Campo.html"></article>
+<p class="lead">Cada botão fica cadeado até o login com Google. Sem QR nesta entrada.</p>
+<div id="ops-login">
+<button type="button" class="btn" id="ops-google">🔒 Entrar com Google</button>
+<span id="ops-status">Cadeado fechado. Autentique para liberar as missões.</span>
 </div>
-<footer>Envie os HTML das missões para esta pasta na branch Fisiologia para acabar o 404.</footer>
+<div class="grid">
+<article><p class="eyebrow">Respiratório</p><h2>Operação Alvéolo Seguro</h2><p>Mecânica, zonas de West, curva da Hb.</p><div class="actions"><a class="btn" href="Operacao-Alveolo-Seguro.html">🔒 Com cronômetro</a><a class="btn ghost" href="Operacao-Alveolo-Seguro-sem-cronometro.html">🔒 Sem cronômetro</a></div></article>
+<article><p class="eyebrow">Celular</p><h2>Operação Membrana Sitiada</h2><p>Potencial, SGLT e osmose.</p><div class="actions"><a class="btn" href="Operacao-Membrana-Sitiada.html">🔒 Com cronômetro</a><a class="btn ghost" href="Operacao-Membrana-Sitiada-sem-cronometro.html">🔒 Sem cronômetro</a></div></article>
+<article><p class="eyebrow">Muscular</p><h2>Operação Unidade Motora</h2><p>E–C, isométrica e recrutamento.</p><div class="actions"><a class="btn" href="Operacao-Unidade-Motora.html">🔒 Com cronômetro</a><a class="btn ghost" href="Operacao-Unidade-Motora-sem-cronometro.html">🔒 Sem cronômetro</a></div></article>
+<article><p class="eyebrow">Osteoarticular · EF</p><h2>Operação Matriz Óssea</h2><p>PTH, Wolff e osteoclastos.</p><div class="actions"><a class="btn" href="Operacao-Matriz-Ossea.html">🔒 Com cronômetro</a><a class="btn ghost" href="Operacao-Matriz-Ossea-sem-cronometro.html">🔒 Sem cronômetro</a></div></article>
+<article><p class="eyebrow">Cardiovascular</p><h2>Operação Circuito Fechado</h2><p>PAM, Poiseuille e ortostase.</p><div class="actions"><a class="btn" href="Operacao-Circuito-Fechado.html">🔒 Com cronômetro</a><a class="btn ghost" href="Operacao-Circuito-Fechado-sem-cronometro.html">🔒 Sem cronômetro</a></div></article>
+<article><p class="eyebrow">Integração</p><h2>Operação Fick em Campo</h2><p>Fick, Hb e VO₂.</p><div class="actions"><a class="btn" href="Operacao-Fick-em-Campo.html">🔒 Com cronômetro</a><a class="btn ghost" href="Operacao-Fick-em-Campo-sem-cronometro.html">🔒 Sem cronômetro</a></div></article>
+</div>
+<footer>O cadeado abre só depois do login Google. Sem QR nesta página.</footer>
 </main>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="gate-google.js"></script>
+<script>
+const status = document.getElementById('ops-status');
+function markOpen(user){
+  document.querySelectorAll('a.btn').forEach((a)=>{ a.textContent = a.textContent.replace('🔒','🔓'); });
+  const g=document.getElementById('ops-google');
+  if(g) g.textContent = '🔓 ' + (user.email || 'Google');
+  if(status) status.textContent = 'Cadeado aberto para ' + (user.email || 'esta conta') + '.';
+}
+document.querySelectorAll('a.btn[href]').forEach((a)=>{
+  a.addEventListener('click', async (ev)=>{
+    if(window.OpsGate && window.OpsGate.currentUser()) return;
+    ev.preventDefault();
+    try{
+      const user = await window.OpsGate.ensureAuth();
+      markOpen(user);
+      location.href = a.getAttribute('href');
+    }catch(e){ if(status) status.textContent = e.message || String(e); }
+  });
+});
+document.getElementById('ops-google').onclick = async ()=>{
+  try{
+    const user = await window.OpsGate.ensureAuth();
+    markOpen(user);
+  }catch(e){ if(status) status.textContent = e.message || String(e); }
+};
+</script>
 </body>
 </html>
