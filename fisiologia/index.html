@@ -13,62 +13,29 @@ h1{font-weight:550;letter-spacing:-.04em;font-size:clamp(1.8rem,4vw,2.6rem);marg
 h1 span{color:var(--cyan)}
 .lead{color:var(--muted);max-width:40rem}
 .grid{display:grid;gap:14px;margin-top:28px}
-article{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:linear-gradient(160deg,#152633bb,#0d1923ed)}
+article{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:linear-gradient(160deg,#152633bb,#0d1923ed);display:grid;grid-template-columns:1fr 108px;gap:16px;align-items:center}
 article h2{margin:0 0 6px;font-size:1.08rem}
 article p{margin:0 0 12px;color:var(--muted);font-size:.9rem}
-.actions{display:flex;flex-wrap:wrap;gap:10px}
 a.btn{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:8px;border:1px solid #a4fff144;background:linear-gradient(#79efdb,#4fcdbb);color:#072a2a;font-size:13px;font-weight:700;text-decoration:none}
-a.ghost{background:#13212a;border:1px solid var(--line);color:var(--text)}
+.qr{width:96px;height:96px;border-radius:10px;background:#fff;padding:6px}
 footer{margin-top:36px;color:#718996;font-size:12px}
+@media(max-width:640px){article{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <main>
 <p class="eyebrow"><a href="../" style="color:inherit;text-decoration:none">Atividades extras</a> · Fisiologia</p>
 <h1>Operações de <span>sala</span></h1>
-<p class="lead">O GitHub Pages desta coleção publica a branch Fisiologia. O Alvéolo já está no ar; as outras missões entram nesta pasta.</p>
+<p class="lead">O QR abre a missão. O Alvéolo já está no ar. As outras páginas entram quando os HTML forem enviados a esta pasta.</p>
 <div class="grid">
-<article>
-<p class="eyebrow">Respiratório · no ar</p>
-<h2>Operação Alvéolo Seguro</h2>
-<p>Mecânica, zonas de West, curva da Hb e volume alveolar.</p>
-<div class="actions">
-<a class="btn" href="../Operacao-Alveolo-Seguro.html">Com cronômetro ↗</a>
-<a class="btn ghost" href="../Operacao-Alveolo-Seguro-sem-cronometro.html">Sem cronômetro</a>
+<article><div><p class="eyebrow">Respiratório · no ar</p><h2>Operação Alvéolo Seguro</h2><p>Mecânica, zonas de West, curva da Hb.</p><a class="btn" href="../Operacao-Alveolo-Seguro.html">Abrir ↗</a></div><img class="qr" alt="QR Alvéolo" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fdrmarionascimento.github.io%2FAtividades-Extras%2FOperacao-Alveolo-Seguro.html"></article>
+<article><div><p class="eyebrow">Celular</p><h2>Operação Membrana Sitiada</h2><p>Potencial, SGLT e osmose.</p><a class="btn" href="Operacao-Membrana-Sitiada.html">Abrir ↗</a></div><img class="qr" alt="QR Membrana" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fdrmarionascimento.github.io%2FAtividades-Extras%2Ffisiologia%2FOperacao-Membrana-Sitiada.html"></article>
+<article><div><p class="eyebrow">Muscular</p><h2>Operação Unidade Motora</h2><p>E–C, isométrica e recrutamento.</p><a class="btn" href="Operacao-Unidade-Motora.html">Abrir ↗</a></div><img class="qr" alt="QR Motora" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fdrmarionascimento.github.io%2FAtividades-Extras%2Ffisiologia%2FOperacao-Unidade-Motora.html"></article>
+<article><div><p class="eyebrow">Osteoarticular · EF</p><h2>Operação Matriz Óssea</h2><p>PTH, Wolff e osteoclastos.</p><a class="btn" href="Operacao-Matriz-Ossea.html">Abrir ↗</a></div><img class="qr" alt="QR Matriz" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fdrmarionascimento.github.io%2FAtividades-Extras%2Ffisiologia%2FOperacao-Matriz-Ossea.html"></article>
+<article><div><p class="eyebrow">Cardiovascular</p><h2>Operação Circuito Fechado</h2><p>PAM, Poiseuille e ortostase.</p><a class="btn" href="Operacao-Circuito-Fechado.html">Abrir ↗</a></div><img class="qr" alt="QR Circuito" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fdrmarionascimento.github.io%2FAtividades-Extras%2Ffisiologia%2FOperacao-Circuito-Fechado.html"></article>
+<article><div><p class="eyebrow">Integração</p><h2>Operação Fick em Campo</h2><p>Fick, Hb e VO₂.</p><a class="btn" href="Operacao-Fick-em-Campo.html">Abrir ↗</a></div><img class="qr" alt="QR Fick" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fdrmarionascimento.github.io%2FAtividades-Extras%2Ffisiologia%2FOperacao-Fick-em-Campo.html"></article>
 </div>
-</article>
-<article>
-<p class="eyebrow">Celular</p>
-<h2>Operação Membrana Sitiada</h2>
-<p>Potencial de repouso, SGLT e osmose.</p>
-<a class="btn" href="Operacao-Membrana-Sitiada.html">Abrir ↗</a>
-</article>
-<article>
-<p class="eyebrow">Muscular</p>
-<h2>Operação Unidade Motora</h2>
-<p>Acoplamento E–C, isométrica e recrutamento.</p>
-<a class="btn" href="Operacao-Unidade-Motora.html">Abrir ↗</a>
-</article>
-<article>
-<p class="eyebrow">Osteoarticular · só EF</p>
-<h2>Operação Matriz Óssea</h2>
-<p>PTH, Lei de Wolff e osteoclastos.</p>
-<a class="btn" href="Operacao-Matriz-Ossea.html">Abrir ↗</a>
-</article>
-<article>
-<p class="eyebrow">Cardiovascular</p>
-<h2>Operação Circuito Fechado</h2>
-<p>PAM = DC × RPT, Poiseuille e ortostase.</p>
-<a class="btn" href="Operacao-Circuito-Fechado.html">Abrir ↗</a>
-</article>
-<article>
-<p class="eyebrow">Integração</p>
-<h2>Operação Fick em Campo</h2>
-<p>Equação de Fick, curva da Hb e limite do VO₂.</p>
-<a class="btn" href="Operacao-Fick-em-Campo.html">Abrir ↗</a>
-</article>
-</div>
-<footer>As cinco missões novas precisam dos HTML enviados a esta pasta. O Alvéolo já abre pelos botões acima.</footer>
+<footer>Envie os HTML das missões para esta pasta na branch Fisiologia para acabar o 404.</footer>
 </main>
 </body>
 </html>
