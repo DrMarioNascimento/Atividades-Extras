@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="sim-category" content="integracao">
+<meta name="sim-course" content="ef,fisio">
+<meta name="sim-kind" content="operacao-sala">
+<meta name="sim-timer" content="nao">
+<title>Operação Fick em Campo · sem cronômetro</title>
+<style>
+:root{color-scheme:dark;--bg:#070e15;--muted:#91a6b5;--text:#e8f3f6;--cyan:#65ead8;--line:rgba(157,201,218,.14)}
+*{box-sizing:border-box}body{margin:0;background:#070e15;color:var(--text);font:16px/1.5 Inter,Segoe UI,Arial,sans-serif}
+.app{max-width:880px;margin:auto;padding:24px 18px}
+.eyebrow{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+h1{font-weight:550;font-size:clamp(1.6rem,4vw,2.2rem)}h1 span{color:var(--cyan)}
+.panel{border:1px solid var(--line);border-radius:14px;padding:16px 18px;background:#101e29;margin:12px 0}
+.primary{border:1px solid #a4fff144;background:linear-gradient(#79efdb,#4fcdbb);color:#072a2a;font-weight:700;padding:10px 14px;border-radius:8px}
+.ghost{background:#13212a;border:1px solid var(--line);color:var(--text);padding:10px 14px;border-radius:8px}
+.entry{display:flex;gap:8px;margin-top:8px}
+.entry input{flex:1;border:1px solid #3c5464;background:#060f18;color:var(--text);border-radius:8px;padding:10px;text-transform:uppercase}
+.feedback{font-size:12px;color:var(--muted);min-height:16px}
+.station.solved{border-color:#65ead84d}
+footer{margin-top:24px;color:#718996;font-size:12px}
+</style></head>
+<body>
+<div class="app">
+<p class="eyebrow"><a href="./" style="color:inherit">Operações de sala</a></p>
+<h1>O oxigênio <span>tem conta.</span></h1>
+<article class="panel station" id="stationA"><div class="eyebrow">Estação A</div><h2>Equação de Fick</h2><form data-station="A"><div class="entry"><input id="codeA" maxlength="18"><button class="primary" type="submit">Validar</button></div><p class="feedback" id="feedbackA"></p></form></article>
+<article class="panel station" id="stationB"><div class="eyebrow">Estação B</div><h2>Curva da Hb</h2><form data-station="B"><div class="entry"><input id="codeB" maxlength="18"><button class="primary" type="submit">Validar</button></div><p class="feedback" id="feedbackB"></p></form></article>
+<article class="panel station" id="stationC"><div class="eyebrow">Estação C</div><h2>Limite do VO₂</h2><form data-station="C"><div class="entry"><input id="codeC" maxlength="18"><button class="primary" type="submit">Validar</button></div><p class="feedback" id="feedbackC"></p></form></article>
+<section class="panel">Progresso <strong id="progress">00 / 03</strong></section>
+<section class="panel" id="final-wrap" hidden><form id="final-form" class="entry"><input id="final-code" maxlength="18"><button class="primary" type="submit">Restaurar</button></form><p class="feedback" id="final-fb"></p></section>
+<p><button class="ghost" id="reset">Reiniciar missão</button></p>
+<footer>Simuladores interativos utilizados nas disciplinas de Fisiologia Humana do Prof. Dr. Mário César Nascimento ©</footer>
+</div>
+<dialog id="success" style="background:#0b1822;color:#e8f3f6;padding:24px"><h2>Você está preparado para a avaliação!</h2><form method="dialog"><button class="primary">Fechar</button></form></dialog>
+<script>
+const NO_TIMER=true;
+const CONFIG={codes:{A:'FICK',B:'DIREITA',C:'DC'},finalCode:'VO2',timerResetPassword:'Monitor2026'};
+const solved=new Set(); let complete=false;
+const $=id=>document.getElementById(id);
+const normalize=v=>String(v||'').trim().toUpperCase();
+const letters=Object.keys(CONFIG.codes);
+function canAnswer(){return !complete;}
+function updateProgress(){const n=solved.size;$('progress').textContent=String(n).padStart(2,'0')+' / 03';$('final-wrap').hidden=n!==3;}
+document.querySelectorAll('[data-station]').forEach(form=>{form.addEventListener('submit',ev=>{ev.preventDefault();const key=form.dataset.station;if(!canAnswer()||solved.has(key))return;if(normalize($('code'+key).value)!==normalize(CONFIG.codes[key])){$('feedback'+key).textContent='Chave não reconhecida.';return;}solved.add(key);form.closest('.station').classList.add('solved');$('feedback'+key).textContent='Chave validada.';updateProgress();});});
+$('final-form').addEventListener('submit',ev=>{ev.preventDefault();if(solved.size!==3||complete)return;if(normalize($('final-code').value)!=='VO2'){$('final-fb').textContent='Chave final não reconhecida.';return;}complete=true;$('success').showModal();});
+$('reset').onclick=()=>location.reload();updateProgress();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="gate-google.js"></script>
+<script src="firebase-ops.js"></script>
+</body></html>
