@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Operação: Circuito Fechado</title>
+<link rel="stylesheet" href="operacao-lab.css">
+</head>
+<body>
+<div class="container">
+<p style="margin:0 0 12px;font-size:0.8rem;"><a href="./" style="color:#9ca3af;text-decoration:none;">← Operações de sala</a></p>
+<header><h1>Operação: Circuito Fechado</h1><p>PAM, débito, Poiseuille e ajuste ortostático</p></header>
+<div class="dashboard-top">
+<div class="metric-box"><span>Reserva de ATP cardíaco</span><strong id="atp-text">100% (Estável)</strong><div class="atp-container"><div class="atp-bar" id="atp-bar"></div></div></div>
+<div class="metric-box"><span>Perfil do Caso</span><strong id="dash-case-name" style="font-size:0.85rem;color:var(--accent)">Aguardando Início</strong></div>
+<div class="metric-box"><span>Status da Missão</span><strong id="global-status" style="font-size:0.9rem;color:var(--warning)">Em Espera</strong></div>
+</div>
+<div class="setup-bar">
+<div class="setup-group"><label>Caso de Estudo / Aluno</label>
+<select id="case-select">
+<optgroup label="Situações Clínicas (Pacientes)"><option value="clinico1">Paciente A: Hipertensão arterial</option><option value="clinico2">Paciente B: Hipotensão / má perfusão</option></optgroup>
+<optgroup label="Situações Escolares e Esportivas"><option value="escolar1">Atleta 1: Exercício dinâmico</option><option value="escolar2">Atleta 2: Ortostase após exercício</option><option value="escolar3">Aluno C (Inclusão): Intolerância ortostática</option><option value="escolar4">Aluno D (Inclusão): Sedentarismo</option></optgroup>
+</select></div>
+<div class="setup-group"><label>Cronômetro</label><select id="timer-select" onchange="toggleTimerInput()"><option value="off">Sem Cronômetro</option><option value="on">Com Cronômetro</option></select></div>
+<div class="setup-group" id="timer-input-wrapper" style="display:none;"><label>Tempo (Segundos)</label><input type="number" id="custom-time" value="45" min="10" max="300"></div>
+<div><button class="btn-start" onclick="initLabSession()">Iniciar</button></div>
+</div>
+<div class="card hidden" id="phase-1-card">
+<h2><span>Fase 1: Débito cardíaco e RPT</span><span id="lock-1" class="padlock-status locked">Cadeado Fechado</span></h2>
+<div id="timer-box-1" class="timer-display hidden">Tempo Restante: <span id="countdown-1">45</span>s</div>
+<div class="instruction-box" id="p1-objective">A PAM emerge da relação entre débito e resistência periférica total.</div>
+<div class="control-group"><label>Débito cardíaco relativo: <span id="val-dc">50</span>%</label><input type="range" id="dc" min="0" max="100" value="50" oninput="updateLabPreview(0)"></div>
+<div class="control-group"><label>Resistência periférica total: <span id="val-rpt">50</span>%</label><input type="range" id="rpt" min="0" max="100" value="50" oninput="updateLabPreview(0)"></div>
+<canvas id="canvas-p1"></canvas>
+<button class="btn-action" onclick="validatePhase1()">Validar circuito basal e abrir cadeado</button>
+</div>
+<div class="card hidden" id="phase-2-card">
+<h2><span>Fase 2: Poiseuille e ortostase</span><span id="lock-2" class="padlock-status locked">Cadeado Fechado</span></h2>
+<div id="timer-box-2" class="timer-display hidden">Tempo Restante: <span id="countdown-2">45</span>s</div>
+<div class="instruction-box">O fluxo varia com a 4a potência do raio. Ajuste também a resposta ao ortostatismo.</div>
+<div class="control-group"><label>Raio vascular efetivo (Poiseuille): <span id="val-raio">50</span>%</label><input type="range" id="raio" min="0" max="100" value="50" oninput="updateLabPreview(1)"></div>
+<div class="control-group"><label>Ajuste ortostático (barorreflexo): <span id="val-orto">50</span>%</label><input type="range" id="orto" min="0" max="100" value="50" oninput="updateLabPreview(1)"></div>
+<div style="font-size:0.8rem;color:var(--text-muted);margin-top:5px;">Estado atual: <strong id="waveform-label" style="color:var(--accent)">Circuito em espera</strong></div>
+<canvas id="canvas-p2"></canvas>
+<button class="btn-action" onclick="validatePhase2()">Fechar o circuito e abrir cadeado</button>
+</div>
+</div>
+<div class="modal-overlay" id="custom-modal"><div class="modal-box" id="modal-box-content"><div class="modal-icon" id="modal-icon">🏆</div><div class="modal-title" id="modal-title">Título</div><div class="modal-text" id="modal-text">Texto</div><button class="btn-action" id="modal-btn" onclick="closeModal()">Fechar</button></div></div>
+<script>
+window.LAB = {
+  phases: [
+    { sliders: [{id:"dc", short:"débito cardíaco", min:0, max:100, value:50},{id:"rpt", short:"resistência periférica", min:0, max:100, value:50}], canvas:"cardio" },
+    { sliders: [{id:"raio", short:"raio (Poiseuille)", min:0, max:100, value:50},{id:"orto", short:"ajuste ortostático", min:0, max:100, value:50}], canvas:"cardio", status: vs => vs[1] >= 75 ? "Resposta ortostática reforçada" : vs[0] >= 70 ? "Vasodilatação predominante" : "Circuito em equilíbrio parcial" }
+  ],
+  cases: {
+    clinico1: { title:"Paciente A: Hipertensão arterial", desc:"PAM elevada por RPT alta. Não dispare débito; reduza o raio de forma controlada.", tolerance:12, targets:{dc:60, rpt:80, raio:40, orto:70} },
+    clinico2: { title:"Paciente B: Hipotensão / má perfusão", desc:"Eleve o débito e abra o raio o suficiente para recuperar o fluxo.", tolerance:12, targets:{dc:80, rpt:55, raio:70, orto:60} },
+    escolar1: { title:"Atleta 1: Exercício dinâmico", desc:"Alto débito com queda relativa da RPT e aumento do raio.", tolerance:12, targets:{dc:90, rpt:45, raio:75, orto:50} },
+    escolar2: { title:"Atleta 2: Ortostase após exercício", desc:"Ao erguer-se, preserve PAM com ajuste ortostático alto.", tolerance:12, targets:{dc:70, rpt:65, raio:55, orto:85} },
+    escolar3: { title:"Aluno C (Inclusão): Intolerância ortostática", desc:"Priorize o ajuste ortostático e evite vasodilatação excessiva.", tolerance:10, targets:{dc:65, rpt:60, raio:50, orto:80} },
+    escolar4: { title:"Aluno D (Inclusão): Sedentarismo", desc:"Débito ainda baixo e RPT um pouco alta. Reabilite sem extremos.", tolerance:10, targets:{dc:55, rpt:70, raio:50, orto:65} }
+  }
+};
+</script>
+<script src="operacao-lab-engine.js"></script>
+</body></html>
