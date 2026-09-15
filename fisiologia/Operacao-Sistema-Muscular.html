@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Operação: Unidade Motora | Laboratório & Discussão Acadêmica</title>
+<link rel="stylesheet" href="operacao-lab.css">
+</head>
+<body>
+<div class="container">
+<p style="margin:0 0 12px;font-size:0.8rem;"><a href="./" style="color:#9ca3af;text-decoration:none;">← Operações de sala</a></p>
+<header>
+<h1>Operação: Unidade Motora</h1>
+<p>Laboratório de Eletrofisiologia, Desempenho & Inclusão Neuromuscular</p>
+</header>
+<div class="dashboard-top">
+<div class="metric-box">
+<span>Reserva de ATP Celular (Sistema)</span>
+<strong id="atp-text">100% (Estável)</strong>
+<div class="atp-container"><div class="atp-bar" id="atp-bar"></div></div>
+</div>
+<div class="metric-box">
+<span>Perfil do Caso</span>
+<strong id="dash-case-name" style="font-size: 0.85rem; color: var(--accent);">Aguardando Início</strong>
+</div>
+<div class="metric-box">
+<span>Status da Missão</span>
+<strong id="global-status" style="font-size: 0.9rem; color: var(--warning);">Em Espera</strong>
+</div>
+</div>
+<div class="setup-bar">
+<div class="setup-group">
+<label>Caso de Estudo / Aluno</label>
+<select id="case-select">
+<optgroup label="Situações Clínicas (Pacientes)">
+<option value="clinico1">Paciente A: Reabilitação de Quadríceps pós-imobilização (Alvo: 65N)</option>
+<option value="clinico2">Paciente B: Controle de Hipertonia de Membro Superior (Alvo: 50N)</option>
+</optgroup>
+<optgroup label="Situações Escolares & Esportivas">
+<option value="escolar1">Aluno Atleta 1: Teste de Carga Máxima no Levantamento Terra (Alvo: 85N)</option>
+<option value="escolar2">Aluno Atleta 2: Otimização de Recrutamento para Sprint (Alvo: 60N)</option>
+<option value="escolar3">Aluno C (Inclusão): Miopatia Leve / Fadiga Muscular Precoce (Alvo: 35N)</option>
+<option value="escolar4">Aluno D (Inclusão): Paralisia Cerebral Leve / Ajuste de Tônus (Alvo: 50N)</option>
+</optgroup>
+</select>
+</div>
+<div class="setup-group">
+<label>Cronômetro</label>
+<select id="timer-select" onchange="toggleTimerInput()">
+<option value="off">Sem Cronômetro</option>
+<option value="on">Com Cronômetro</option>
+</select>
+</div>
+<div class="setup-group" id="timer-input-wrapper" style="display: none;">
+<label>Tempo (Segundos)</label>
+<input type="number" id="custom-time" value="45" min="10" max="300">
+</div>
+<div><button class="btn-start" onclick="initLabSession()">Iniciar</button></div>
+</div>
+<div class="card hidden" id="phase-1-card">
+<h2><span>Fase 1: Recrutamento (Princípio do Tamanho)</span><span id="lock-1" class="padlock-status locked">Cadeado Fechado</span></h2>
+<div id="timer-box-1" class="timer-display hidden">Tempo Restante: <span id="countdown-1">45</span>s</div>
+<div class="instruction-box" id="p1-objective">Carregando cenário...</div>
+<div class="control-group">
+<label>Fibras Lentas (Tipo I - Limiar Baixo): <span id="val-t1">0</span>%</label>
+<input type="range" id="slider-t1" min="0" max="100" value="0" oninput="updateRawInputs()">
+</div>
+<div class="control-group">
+<label>Fibras Intermediárias (Tipo IIa - Limiar Médio): <span id="val-t2a">0</span>%</label>
+<input type="range" id="slider-t2a" min="0" max="100" value="0" oninput="updateRawInputs()">
+</div>
+<div class="control-group">
+<label>Fibras Rápidas (Tipo IIx - Limiar Alto): <span id="val-t2x">0</span>%</label>
+<input type="range" id="slider-t2x" min="0" max="100" value="0" oninput="updateRawInputs()">
+</div>
+<canvas id="canvas-p1"></canvas>
+<button class="btn-action" onclick="validatePhase1()">Testar Protocolo e Tentar Abrir Cadeado</button>
+</div>
+<div class="card hidden" id="phase-2-card">
+<h2><span>Fase 2: Frequência de Estímulo (Dinâmica do Tétano)</span><span id="lock-2" class="padlock-status locked">Cadeado Fechado</span></h2>
+<div id="timer-box-2" class="timer-display hidden">Tempo Restante: <span id="countdown-2">45</span>s</div>
+<div class="instruction-box">Ajuste a frequência do estímulo elétrico para obter o <strong>Tétano Completo</strong> adequado à demanda do caso selecionado.</div>
+<div class="control-group">
+<label>Frequência do Estímulo Neural: <span id="val-freq">5</span> Hz</label>
+<input type="range" id="slider-freq" min="2" max="60" value="5" oninput="updatePhase2Preview()">
+</div>
+<div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;">Padrão Fenomenológico Atual: <strong id="waveform-label" style="color:var(--accent)">Abalo Isolado</strong></div>
+<canvas id="canvas-p2"></canvas>
+<button class="btn-action" onclick="validatePhase2()">Aplicar Estímulo e Tentar Abrir Cadeado</button>
+</div>
+</div>
+<div class="modal-overlay" id="custom-modal">
+<div class="modal-box" id="modal-box-content">
+<div class="modal-icon" id="modal-icon">🏆</div>
+<div class="modal-title" id="modal-title">Título da Mensagem</div>
+<div class="modal-text" id="modal-text">Descrição detalhada do status da missão.</div>
+<button class="btn-action" id="modal-btn" onclick="closeModal()">Fechar e Discutir</button>
+</div>
+</div>
+<script src="operacao-sistema-muscular.js"></script>
+</body>
+</html>
