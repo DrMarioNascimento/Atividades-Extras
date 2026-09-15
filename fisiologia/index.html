@@ -5,36 +5,228 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Fisiologia · Atividades extras</title>
 <style>
-:root{color-scheme:dark;--bg:#070e15;--text:#e8f3f6;--muted:#91a6b5;--cyan:#65ead8;--line:rgba(157,201,218,.16)}
+:root{color-scheme:dark;--bg:#070e15;--text:#e8f3f6;--muted:#91a6b5;--cyan:#65ead8;--line:rgba(157,201,218,.16);--card:#101e29}
 *{box-sizing:border-box}body{margin:0;min-height:100vh;background:#070e15;color:var(--text);font:16px/1.5 Inter,Segoe UI,Arial,sans-serif}
-main{max-width:860px;margin:0 auto;padding:48px 22px 64px}
+main{max-width:920px;margin:0 auto;padding:48px 22px 64px}
 .eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 h1{font-weight:550;font-size:clamp(1.8rem,4vw,2.6rem);margin:.4rem 0 0}
 h1 span{color:var(--cyan)}
-.lead{color:var(--muted)}
-.grid{display:grid;gap:14px;margin-top:28px}
-article{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:#101e29}
-article h2{margin:0 0 6px;font-size:1.08rem}
+.lead{color:var(--muted);max-width:42rem}
+.units{display:grid;gap:28px;margin-top:36px}
+.unit{border:1px solid var(--line);border-radius:18px;padding:20px 20px 16px;background:linear-gradient(180deg,#12202b,#0d1923)}
+.unit-head{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.unit-num{flex:0 0 42px;width:42px;height:42px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(#79efdb,#4fcdbb);color:#072a2a;font-weight:800}
+.unit-head h2{margin:0;font-size:1.05rem;line-height:1.3}
+.unit-head p{margin:4px 0 0;color:var(--muted);font-size:.82rem}
+.grid{display:grid;gap:12px}
+article{border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:#0c1720}
+article h3{margin:0 0 4px;font-size:1rem;font-weight:650}
+article p{margin:0 0 10px;color:var(--muted);font-size:.84rem}
 .actions{display:flex;flex-wrap:wrap;gap:10px}
-a.btn{display:inline-flex;align-items:center;min-height:42px;padding:0 14px;border-radius:8px;border:1px solid #a4fff144;background:linear-gradient(#79efdb,#4fcdbb);color:#072a2a;font-size:13px;font-weight:700;text-decoration:none}
-a.ghost{background:#13212a;border:1px solid var(--line);color:var(--text)}
-footer{margin-top:36px;color:#718996;font-size:12px}
+a.btn,button.btn{display:inline-flex;align-items:center;min-height:42px;padding:0 14px;border-radius:8px;border:1px solid #a4fff144;background:linear-gradient(#79efdb,#4fcdbb);color:#072a2a;font-size:13px;font-weight:700;text-decoration:none;cursor:pointer;font-family:inherit}
+a.ghost,button.ghost{background:#13212a;border:1px solid var(--line);color:var(--text)}
+footer{margin-top:36px;color:#718996;font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+#gate{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:22px;background:rgba(4,10,16,.92);backdrop-filter:blur(10px)}
+#gate[hidden]{display:none}
+.gate-box{width:min(100%,420px);border:1px solid var(--line);border-radius:18px;padding:28px 24px;background:#101e29;box-shadow:0 24px 60px #0008}
+.gate-box h2{margin:8px 0 8px;font-size:1.35rem}
+.gate-box p{margin:0 0 16px;color:var(--muted);font-size:.92rem}
+.gate-box input{width:100%;min-height:46px;margin:0 0 10px;padding:0 12px;border-radius:10px;border:1px solid #3c5464;background:#060f18;color:var(--text);font:inherit}
+.gate-err{min-height:18px;margin:0 0 10px;color:#fca5a5;font-size:.82rem}
+body.locked main{visibility:hidden}
 </style>
 </head>
-<body>
-<main>
-<p class="eyebrow">Atividades extras · Fisiologia</p>
-<h1>Operações de <span>sala</span></h1>
-<p class="lead">Nome padrão: <code>Operacao-Nome-com-cronometro.html</code> ou <code>Operacao-Nome-sem-cronometro.html</code>.</p>
-<div class="grid">
-<article><p class="eyebrow">Respiratório</p><h2>Alvéolo Seguro</h2><div class="actions"><a class="btn" href="Operacao-Alveolo-Seguro-com-cronometro.html">Com cronômetro</a><a class="btn ghost" href="Operacao-Alveolo-Seguro-sem-cronometro.html">Sem cronômetro</a></div></article>
-<article><p class="eyebrow">Celular</p><h2>Membrana Sitiada</h2><div class="actions"><a class="btn" href="Operacao-Membrana-Sitiada-com-cronometro.html">Com cronômetro</a><a class="btn ghost" href="Operacao-Membrana-Sitiada-sem-cronometro.html">Sem cronômetro</a></div></article>
-<article><p class="eyebrow">Muscular</p><h2>Unidade Motora</h2><div class="actions"><a class="btn" href="Operacao-Unidade-Motora-com-cronometro.html">Com cronômetro</a><a class="btn ghost" href="Operacao-Unidade-Motora-sem-cronometro.html">Sem cronômetro</a></div></article>
-<article><p class="eyebrow">Osteoarticular · EF</p><h2>Matriz Óssea</h2><div class="actions"><a class="btn" href="Operacao-Matriz-Ossea-com-cronometro.html">Com cronômetro</a><a class="btn ghost" href="Operacao-Matriz-Ossea-sem-cronometro.html">Sem cronômetro</a></div></article>
-<article><p class="eyebrow">Cardiovascular</p><h2>Circuito Fechado</h2><div class="actions"><a class="btn" href="Operacao-Circuito-Fechado-com-cronometro.html">Com cronômetro</a><a class="btn ghost" href="Operacao-Circuito-Fechado-sem-cronometro.html">Sem cronômetro</a></div></article>
-<article><p class="eyebrow">Integração</p><h2>Fick em Campo</h2><div class="actions"><a class="btn" href="Operacao-Fick-em-Campo-com-cronometro.html">Com cronômetro</a><a class="btn ghost" href="Operacao-Fick-em-Campo-sem-cronometro.html">Sem cronômetro</a></div></article>
+<body class="locked">
+<div id="gate">
+  <form class="gate-box" id="gate-form" autocomplete="off">
+    <p class="eyebrow">Área restrita · Fisiologia</p>
+    <h2>Validação de acesso</h2>
+    <p>Informe a senha da disciplina para abrir as operações de sala organizadas por unidade.</p>
+    <input id="gate-pass" type="password" placeholder="Senha" autofocus>
+    <p class="gate-err" id="gate-err"></p>
+    <button class="btn" type="submit">Entrar</button>
+  </form>
 </div>
-<footer>Simuladores interativos utilizados nas disciplinas de Fisiologia Humana do Prof. Dr. Mário César Nascimento ©</footer>
+<main>
+<p class="eyebrow"><a href="../" style="color:inherit;text-decoration:none">Atividades extras</a> · Fisiologia</p>
+<h1>Operações de <span>sala</span></h1>
+<p class="lead">Mesma estrutura de unidades da Fisiologia Interativa. Os laboratórios de celular (Fases 1 e 2) e de unidade motora já trazem cronômetro opcional dentro da própria tela.</p>
+
+<div class="units">
+
+<section class="unit" id="unidade-1">
+  <div class="unit-head">
+    <div class="unit-num">1</div>
+    <div>
+      <p class="eyebrow">Unidade 1</p>
+      <h2>Fisiologia celular, transporte de substâncias e potenciais de ação</h2>
+      <p>Gradientes, GLUT4, osmolaridade, limiar e cinética de canais.</p>
+    </div>
+  </div>
+  <div class="grid">
+    <article>
+      <p class="eyebrow">Laboratório</p>
+      <h3>Fisiologia Celular · Fase 1</h3>
+      <p>Transporte de membrana, bomba Na⁺/K⁺-ATPase, GLUT4 e osmolaridade.</p>
+      <div class="actions"><a class="btn" href="Operacao-Fisiologia-Celular-Fase-1.html">Abrir Fase 1</a></div>
+    </article>
+    <article>
+      <p class="eyebrow">Laboratório</p>
+      <h3>Fisiologia Celular · Fase 2</h3>
+      <p>Estímulo, limiar (~ −55 mV), canais de Na⁺/K⁺ e overshoot.</p>
+      <div class="actions"><a class="btn" href="Operacao-Fisiologia-Celular-Fase-2.html">Abrir Fase 2</a></div>
+    </article>
+  </div>
+</section>
+
+<section class="unit" id="unidade-2">
+  <div class="unit-head">
+    <div class="unit-num">2</div>
+    <div>
+      <p class="eyebrow">Unidade 2</p>
+      <h2>Excitabilidade e sistema muscular</h2>
+      <p>Princípio do tamanho de Henneman e dinâmica do tétano.</p>
+    </div>
+  </div>
+  <div class="grid">
+    <article>
+      <p class="eyebrow">Laboratório</p>
+      <h3>Unidade Motora</h3>
+      <p>Recrutamento de fibras I, IIa e IIx e frequência para tétano completo.</p>
+      <div class="actions"><a class="btn" href="Operacao-Sistema-Muscular.html">Abrir laboratório</a></div>
+    </article>
+  </div>
+</section>
+
+<section class="unit" id="unidade-3">
+  <div class="unit-head">
+    <div class="unit-num">3</div>
+    <div>
+      <p class="eyebrow">Unidade 3</p>
+      <h2>Sistema osteoarticular</h2>
+      <p>Percurso da Educação Física — PTH, Wolff e osteoclastos.</p>
+    </div>
+  </div>
+  <div class="grid">
+    <article>
+      <p class="eyebrow">Operação clássica</p>
+      <h3>Matriz Óssea</h3>
+      <p>PTH, Wolff e osteoclastos.</p>
+      <div class="actions">
+        <a class="btn" href="Operacao-Matriz-Ossea-com-cronometro.html">Com cronômetro</a>
+        <a class="btn ghost" href="Operacao-Matriz-Ossea-sem-cronometro.html">Sem cronômetro</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="unit" id="unidade-4">
+  <div class="unit-head">
+    <div class="unit-num">4</div>
+    <div>
+      <p class="eyebrow">Unidade 4</p>
+      <h2>Sistema cardiovascular</h2>
+      <p>PAM, Poiseuille e ortostase.</p>
+    </div>
+  </div>
+  <div class="grid">
+    <article>
+      <p class="eyebrow">Operação clássica</p>
+      <h3>Circuito Fechado</h3>
+      <p>Pressão arterial média, raio vascular e ajuste ortostático.</p>
+      <div class="actions">
+        <a class="btn" href="Operacao-Circuito-Fechado-com-cronometro.html">Com cronômetro</a>
+        <a class="btn ghost" href="Operacao-Circuito-Fechado-sem-cronometro.html">Sem cronômetro</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="unit" id="unidade-5">
+  <div class="unit-head">
+    <div class="unit-num">5</div>
+    <div>
+      <p class="eyebrow">Unidade 5</p>
+      <h2>Sistema respiratório</h2>
+      <p>Mecânica, zonas de West e curva da hemoglobina.</p>
+    </div>
+  </div>
+  <div class="grid">
+    <article>
+      <p class="eyebrow">Operação clássica</p>
+      <h3>Alvéolo Seguro</h3>
+      <p>Mecânica ventilatória, zonas de West e curva da Hb.</p>
+      <div class="actions">
+        <a class="btn" href="Operacao-Alveolo-Seguro-com-cronometro.html">Com cronômetro</a>
+        <a class="btn ghost" href="Operacao-Alveolo-Seguro-sem-cronometro.html">Sem cronômetro</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="unit" id="unidade-6">
+  <div class="unit-head">
+    <div class="unit-num">6</div>
+    <div>
+      <p class="eyebrow">Unidade 6</p>
+      <h2>Integração cardiorrespiratória</h2>
+      <p>Fick, hemoglobina e VO₂ em campo.</p>
+    </div>
+  </div>
+  <div class="grid">
+    <article>
+      <p class="eyebrow">Operação clássica</p>
+      <h3>Fick em Campo</h3>
+      <p>Equação de Fick, débito e consumo de oxigênio.</p>
+      <div class="actions">
+        <a class="btn" href="Operacao-Fick-em-Campo-com-cronometro.html">Com cronômetro</a>
+        <a class="btn ghost" href="Operacao-Fick-em-Campo-sem-cronometro.html">Sem cronômetro</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+</div>
+<footer>
+  <span>Simuladores interativos utilizados nas disciplinas de Fisiologia Humana do Prof. Dr. Mário César Nascimento ©</span>
+  <button class="ghost btn" type="button" id="sair">Encerrar sessão</button>
+</footer>
 </main>
+<script>
+const KEY = 'ae_fisio_unlocked';
+const PASS = 'Monitor2026';
+const gate = document.getElementById('gate');
+const form = document.getElementById('gate-form');
+const err = document.getElementById('gate-err');
+
+function unlock() {
+  document.body.classList.remove('locked');
+  gate.hidden = true;
+}
+
+function lock() {
+  sessionStorage.removeItem(KEY);
+  document.body.classList.add('locked');
+  gate.hidden = false;
+  err.textContent = '';
+  const input = document.getElementById('gate-pass');
+  if (input) { input.value = ''; input.focus(); }
+}
+
+if (sessionStorage.getItem(KEY) === '1') unlock();
+
+form.addEventListener('submit', (ev) => {
+  ev.preventDefault();
+  const value = (document.getElementById('gate-pass').value || '').trim();
+  if (value === PASS) {
+    sessionStorage.setItem(KEY, '1');
+    unlock();
+  } else {
+    err.textContent = 'Senha incorreta.';
+  }
+});
+
+document.getElementById('sair').addEventListener('click', lock);
+</script>
 </body>
 </html>
