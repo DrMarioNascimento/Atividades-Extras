@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Operação: Alvéolo Seguro</title>
+<link rel="stylesheet" href="operacao-lab.css">
+</head>
+<body>
+<div class="container">
+<p style="margin:0 0 12px;font-size:0.8rem;"><a href="./" style="color:#9ca3af;text-decoration:none;">← Operações de sala</a></p>
+<header><h1>Operação: Alvéolo Seguro</h1><p>Mecânica ventilatória, zonas de West e curva da hemoglobina</p></header>
+<div class="dashboard-top">
+<div class="metric-box"><span>Reserva de ATP ventilatório</span><strong id="atp-text">100% (Estável)</strong><div class="atp-container"><div class="atp-bar" id="atp-bar"></div></div></div>
+<div class="metric-box"><span>Perfil do Caso</span><strong id="dash-case-name" style="font-size:0.85rem;color:var(--accent)">Aguardando Início</strong></div>
+<div class="metric-box"><span>Status da Missão</span><strong id="global-status" style="font-size:0.9rem;color:var(--warning)">Em Espera</strong></div>
+</div>
+<div class="setup-bar">
+<div class="setup-group"><label>Caso de Estudo / Aluno</label>
+<select id="case-select">
+<optgroup label="Situações Clínicas (Pacientes)"><option value="clinico1">Paciente A: DPOC / resistência alta</option><option value="clinico2">Paciente B: Distúrbio restritivo</option></optgroup>
+<optgroup label="Situações Escolares e Esportivas"><option value="escolar1">Atleta 1: Altitude e curva da Hb</option><option value="escolar2">Atleta 2: Exercício intenso</option><option value="escolar3">Aluno C (Inclusão): Asma leve</option><option value="escolar4">Aluno D (Inclusão): Anemia relativa</option></optgroup>
+</select></div>
+<div class="setup-group"><label>Cronômetro</label><select id="timer-select" onchange="toggleTimerInput()"><option value="off">Sem Cronômetro</option><option value="on">Com Cronômetro</option></select></div>
+<div class="setup-group" id="timer-input-wrapper" style="display:none;"><label>Tempo (Segundos)</label><input type="number" id="custom-time" value="45" min="10" max="300"></div>
+<div><button class="btn-start" onclick="initLabSession()">Iniciar</button></div>
+</div>
+<div class="card hidden" id="phase-1-card">
+<h2><span>Fase 1: Complacência e resistência</span><span id="lock-1" class="padlock-status locked">Cadeado Fechado</span></h2>
+<div id="timer-box-1" class="timer-display hidden">Tempo Restante: <span id="countdown-1">45</span>s</div>
+<div class="instruction-box" id="p1-objective">Ajuste a mecânica do sistema respiratório ao cenário.</div>
+<div class="control-group"><label>Complacência pulmonar: <span id="val-comp">50</span>%</label><input type="range" id="comp" min="0" max="100" value="50" oninput="updateLabPreview(0)"></div>
+<div class="control-group"><label>Resistência de vias aéreas: <span id="val-res">50</span>%</label><input type="range" id="res" min="0" max="100" value="50" oninput="updateLabPreview(0)"></div>
+<canvas id="canvas-p1"></canvas>
+<button class="btn-action" onclick="validatePhase1()">Validar mecânica e abrir cadeado</button>
+</div>
+<div class="card hidden" id="phase-2-card">
+<h2><span>Fase 2: West e curva da Hb</span><span id="lock-2" class="padlock-status locked">Cadeado Fechado</span></h2>
+<div id="timer-box-2" class="timer-display hidden">Tempo Restante: <span id="countdown-2">45</span>s</div>
+<div class="instruction-box">Zona 3 favorece perfusão dependente. Curva à direita entrega mais O2.</div>
+<div class="control-group"><label>Recrutamento de zona de West (3 = alto): <span id="val-west">50</span>%</label><input type="range" id="west" min="0" max="100" value="50" oninput="updateLabPreview(1)"></div>
+<div class="control-group"><label>Deslocamento da curva da Hb à direita: <span id="val-hb">50</span>%</label><input type="range" id="hb" min="0" max="100" value="50" oninput="updateLabPreview(1)"></div>
+<div style="font-size:0.8rem;color:var(--text-muted);margin-top:5px;">Estado atual: <strong id="waveform-label" style="color:var(--accent)">Troca em espera</strong></div>
+<canvas id="canvas-p2"></canvas>
+<button class="btn-action" onclick="validatePhase2()">Restaurar o alvéolo e abrir cadeado</button>
+</div>
+</div>
+<div class="modal-overlay" id="custom-modal"><div class="modal-box" id="modal-box-content"><div class="modal-icon" id="modal-icon">🏆</div><div class="modal-title" id="modal-title">Título</div><div class="modal-text" id="modal-text">Texto</div><button class="btn-action" id="modal-btn" onclick="closeModal()">Fechar</button></div></div>
+<script>
+window.LAB = {
+  phases: [
+    { sliders: [{id:"comp", short:"complacência", min:0, max:100, value:50},{id:"res", short:"resistência de vias", min:0, max:100, value:50}], canvas:"resp" },
+    { sliders: [{id:"west", short:"zona de West", min:0, max:100, value:50},{id:"hb", short:"curva da Hb", min:0, max:100, value:50}], canvas:"resp", status: vs => vs[1] >= 70 ? "Curva deslocada à direita" : vs[0] >= 65 ? "Predomínio de zona 3" : "Troca em zona intermediária" }
+  ],
+  cases: {
+    clinico1: { title:"Paciente A: DPOC / resistência alta", desc:"Vias estreitas. Complacência residual moderada e zona 3.", tolerance:12, targets:{comp:45, res:80, west:70, hb:55} },
+    clinico2: { title:"Paciente B: Distúrbio restritivo", desc:"Pulmão pouco complacente. Evite resistência alta.", tolerance:12, targets:{comp:30, res:50, west:60, hb:50} },
+    escolar1: { title:"Atleta 1: Altitude e curva da Hb", desc:"Desloque a curva à direita e preserve mecânica boa.", tolerance:12, targets:{comp:70, res:40, west:55, hb:80} },
+    escolar2: { title:"Atleta 2: Exercício intenso", desc:"Boa complacência, zona 3 parcial e curva um pouco à direita.", tolerance:12, targets:{comp:75, res:45, west:65, hb:70} },
+    escolar3: { title:"Aluno C (Inclusão): Asma leve", desc:"Resistência aumentada, sem forçar complacência extrema.", tolerance:10, targets:{comp:60, res:70, west:50, hb:50} },
+    escolar4: { title:"Aluno D (Inclusão): Anemia relativa", desc:"A entrega de O2 depende mais do deslocamento da curva.", tolerance:10, targets:{comp:55, res:45, west:55, hb:75} }
+  }
+};
+</script>
+<script src="operacao-lab-engine.js"></script>
+</body></html>
