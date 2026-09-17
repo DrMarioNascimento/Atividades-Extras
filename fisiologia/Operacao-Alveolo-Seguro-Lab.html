@@ -37,7 +37,7 @@
 <div class="card hidden" id="phase-2-card">
 <h2><span>Fase 2: West e curva da Hb</span><span id="lock-2" class="padlock-status locked">Cadeado Fechado</span></h2>
 <div id="timer-box-2" class="timer-display hidden">Tempo Restante: <span id="countdown-2">45</span>s</div>
-<div class="instruction-box">Zona 3 favorece perfusão dependente. Curva à direita entrega mais O2.</div>
+<div class="instruction-box">Zona 3 favorece perfusão dependente. Curva à direita entrega mais O₂. Em altitude o saldo 2,3-BPG × alcalose é um desvio só moderado.</div>
 <div class="control-group"><label>Recrutamento de zona de West (3 = alto): <span id="val-west">50</span>%</label><input type="range" id="west" min="0" max="100" value="50" oninput="updateLabPreview(1)"></div>
 <div class="control-group"><label>Deslocamento da curva da Hb à direita: <span id="val-hb">50</span>%</label><input type="range" id="hb" min="0" max="100" value="50" oninput="updateLabPreview(1)"></div>
 <div style="font-size:0.8rem;color:var(--text-muted);margin-top:5px;">Estado atual: <strong id="waveform-label" style="color:var(--accent)">Troca em espera</strong></div>
@@ -55,14 +55,15 @@ window.LAB = {
   cases: {
     clinico1: { title:"Paciente A: DPOC / resistência alta", desc:"Vias estreitas. Complacência residual moderada e zona 3.", tolerance:12, targets:{comp:45, res:80, west:70, hb:55} },
     clinico2: { title:"Paciente B: Distúrbio restritivo", desc:"Pulmão pouco complacente. Evite resistência alta.", tolerance:12, targets:{comp:30, res:50, west:60, hb:50} },
-    escolar1: { title:"Atleta 1: Altitude e curva da Hb", desc:"Desloque a curva à direita e preserve mecânica boa.", tolerance:12, targets:{comp:70, res:40, west:55, hb:80} },
-    escolar2: { title:"Atleta 2: Exercício intenso", desc:"Boa complacência, zona 3 parcial e curva um pouco à direita.", tolerance:12, targets:{comp:75, res:45, west:65, hb:70} },
+    escolar1: { title:"Atleta 1: Altitude e curva da Hb", desc:"O 2,3-BPG empurra a curva à direita, mas a alcalose respiratória empurra à esquerda. O saldo in vivo é um desvio só moderado à direita. Preserve mecânica boa.", tolerance:12, targets:{comp:70, res:40, west:55, hb:62} },
+    escolar2: { title:"Atleta 2: Exercício intenso", desc:"Boa complacência, zona 3 parcial e curva um pouco à direita (ácido, calor, 2,3-BPG).", tolerance:12, targets:{comp:75, res:45, west:65, hb:70} },
     escolar3: { title:"Aluno C (Inclusão): Asma leve", desc:"Resistência aumentada, sem forçar complacência extrema.", tolerance:10, targets:{comp:60, res:70, west:50, hb:50} },
-    escolar4: { title:"Aluno D (Inclusão): Anemia relativa", desc:"A entrega de O2 depende mais do deslocamento da curva.", tolerance:10, targets:{comp:55, res:45, west:55, hb:75} }
+    escolar4: { title:"Aluno D (Inclusão): Anemia relativa", desc:"A entrega de O₂ depende mais do deslocamento da curva.", tolerance:10, targets:{comp:55, res:45, west:55, hb:75} }
   }
 };
 </script>
 <script src="operacao-lab-engine.js"></script>
 <script src="qr.js"></script>
 <script type="module" src="sala-firebase.js"></script>
-</body></html>
+</body>
+</html>

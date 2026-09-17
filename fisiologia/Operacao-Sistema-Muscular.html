@@ -33,14 +33,14 @@
 <label>Caso de Estudo / Aluno</label>
 <select id="case-select">
 <optgroup label="Situações Clínicas (Pacientes)">
-<option value="clinico1">Paciente A: Reabilitação de Quadríceps pós-imobilização (Alvo: 65N)</option>
-<option value="clinico2">Paciente B: Controle de Hipertonia de Membro Superior (Alvo: 50N)</option>
+<option value="clinico1">Paciente A: Reabilitação de Quadríceps pós-imobilização (Alvo: 65 unid.)</option>
+<option value="clinico2">Paciente B: Controle de Hipertonia de Membro Superior (Alvo: 50 unid.)</option>
 </optgroup>
 <optgroup label="Situações Escolares & Esportivas">
-<option value="escolar1">Aluno Atleta 1: Teste de Carga Máxima no Levantamento Terra (Alvo: 85N)</option>
-<option value="escolar2">Aluno Atleta 2: Otimização de Recrutamento para Sprint (Alvo: 60N)</option>
-<option value="escolar3">Aluno C (Inclusão): Miopatia Leve / Fadiga Muscular Precoce (Alvo: 35N)</option>
-<option value="escolar4">Aluno D (Inclusão): Paralisia Cerebral Leve / Ajuste de Tônus (Alvo: 50N)</option>
+<option value="escolar1">Aluno Atleta 1: Teste de Carga Máxima no Levantamento Terra (Alvo: 85 unid.)</option>
+<option value="escolar2">Aluno Atleta 2: Otimização de Recrutamento para Sprint (Alvo: 60 unid.)</option>
+<option value="escolar3">Aluno C (Inclusão): Miopatia Leve / Fadiga Muscular Precoce (Alvo: 35 unid.)</option>
+<option value="escolar4">Aluno D (Inclusão): Paralisia Cerebral Leve / Ajuste de Tônus (Alvo: 50 unid.)</option>
 </optgroup>
 </select>
 </div>
@@ -79,7 +79,7 @@
 <div class="card hidden" id="phase-2-card">
 <h2><span>Fase 2: Frequência de Estímulo (Dinâmica do Tétano)</span><span id="lock-2" class="padlock-status locked">Cadeado Fechado</span></h2>
 <div id="timer-box-2" class="timer-display hidden">Tempo Restante: <span id="countdown-2">45</span>s</div>
-<div class="instruction-box">Ajuste a frequência do estímulo elétrico para obter o <strong>Tétano Completo</strong> adequado à demanda do caso selecionado.</div>
+<div class="instruction-box">Ajuste a frequência do estímulo elétrico para obter o <strong>tétano adequado ao caso</strong> (fibras de inclusão fundem em frequência menor).</div>
 <div class="control-group">
 <label>Frequência do Estímulo Neural: <span id="val-freq">5</span> Hz</label>
 <input type="range" id="slider-freq" min="2" max="60" value="5" oninput="updatePhase2Preview()">
