@@ -6,12 +6,12 @@ let currentATP = 100;
 let missionCompleted = false;
 
 const caseDatabase = {
-  clinico1: { title: "Paciente A: Reabilitação de Quadríceps pós-imobilização", desc: "Paciente necessita restaurar a função motora com força exata de <strong>65 N</strong>. Respeite o Princípio do Tamanho de Henneman.", targetForce: 65, tolerance: 3 },
-  clinico2: { title: "Paciente B: Controle de Hipertonia de Membro Superior", desc: "Contração controlada de <strong>50 N</strong>, sem saltar para fibras de alto limiar.", targetForce: 50, tolerance: 3 },
-  escolar1: { title: "Aluno Atleta 1: Teste de Carga Máxima (Levantamento Terra)", desc: "Força explosiva e sustentada de <strong>85 N</strong>, com recrutamento progressivo.", targetForce: 85, tolerance: 3 },
-  escolar2: { title: "Aluno Atleta 2: Otimização para Sprint de Velocidade", desc: "Recrutamento para contração submáxima de <strong>60 N</strong>.", targetForce: 60, tolerance: 3 },
-  escolar3: { title: "Aluno C (Inclusão): Miopatia / Fadiga Precoce", desc: "Exigência mecânica leve e segura de <strong>35 N</strong>, evitando fibras rápidas indevidas.", targetForce: 35, tolerance: 2 },
-  escolar4: { title: "Aluno D (Inclusão): Paralisia Cerebral Leve / Tônus", desc: "Ajuste milimétrico de frequência e recrutamento para <strong>50 N</strong>.", targetForce: 50, tolerance: 2 }
+  clinico1: { title: "Paciente A: Reabilitação de Quadríceps pós-imobilização", desc: "Paciente necessita restaurar a função motora com tensão relativa de <strong>65 unid.</strong>. Respeite o Princípio do Tamanho de Henneman.", targetForce: 65, tolerance: 3, minFreq: 38 },
+  clinico2: { title: "Paciente B: Controle de Hipertonia de Membro Superior", desc: "Contração controlada de <strong>50 unid.</strong>, sem saltar para fibras de alto limiar.", targetForce: 50, tolerance: 3, minFreq: 38 },
+  escolar1: { title: "Aluno Atleta 1: Teste de Carga Máxima (Levantamento Terra)", desc: "Tensão relativa explosiva e sustentada de <strong>85 unid.</strong>, com recrutamento progressivo.", targetForce: 85, tolerance: 3, minFreq: 38 },
+  escolar2: { title: "Aluno Atleta 2: Otimização para Sprint de Velocidade", desc: "Recrutamento para contração submáxima de <strong>60 unid.</strong>.", targetForce: 60, tolerance: 3, minFreq: 38 },
+  escolar3: { title: "Aluno C (Inclusão): Miopatia / Fadiga Precoce", desc: "Tensão relativa leve e segura de <strong>35 unid.</strong>, evitando fibras rápidas indevidas. O tétano útil destas fibras ocorre em frequência menor.", targetForce: 35, tolerance: 2, minFreq: 28 },
+  escolar4: { title: "Aluno D (Inclusão): Paralisia Cerebral Leve / Tônus", desc: "Ajuste milimétrico de frequência e recrutamento para <strong>50 unid.</strong>.", targetForce: 50, tolerance: 2, minFreq: 28 }
 };
 
 function toggleTimerInput() {
@@ -110,7 +110,7 @@ function validatePhase1() {
     failMission('Infração do Princípio do Tamanho de Henneman (fibras de alto limiar sem base das lentas).');
   } else if (Math.abs(force - activeCase.targetForce) > activeCase.tolerance) {
     updateATPDisplay(25);
-    failMission('A força gerada (' + force + ' N) divergiu do alvo (' + activeCase.targetForce + ' ± ' + activeCase.tolerance + ' N).');
+    failMission('A tensão relativa gerada (' + force + ' unid.) divergiu do alvo (' + activeCase.targetForce + ' ± ' + activeCase.tolerance + ' unid.).');
   } else {
     document.getElementById('lock-1').className = 'padlock-status unlocked';
     document.getElementById('lock-1').innerText = 'Cadeado Aberto';
@@ -161,9 +161,10 @@ function drawClassicCurves(freq) {
 function validatePhase2() {
   clearInterval(timerInterval);
   let freq = parseInt(document.getElementById('slider-freq').value);
-  if (freq < 38) {
+  const minFreq = activeCase.minFreq || 38;
+  if (freq < minFreq) {
     updateATPDisplay(15);
-    failMission('Frequência insuficiente (' + freq + ' Hz). É preciso tétano completo.');
+    failMission('Frequência insuficiente (' + freq + ' Hz). Para este caso é preciso atingir pelo menos ' + minFreq + ' Hz (fusão compatível com o tipo de fibra/condição).');
   } else {
     missionCompleted = true;
     document.getElementById('lock-2').className = 'padlock-status unlocked';

@@ -108,9 +108,10 @@ function validatePhase1() {
   clearInterval(timerInterval);
   let atpase = parseInt(document.getElementById('slider-atpase').value);
   let glut4 = parseInt(document.getElementById('slider-glut4').value);
-  if (Math.abs(atpase - activeCase.targetATPase) > 12 || Math.abs(glut4 - activeCase.targetGlut4) > 12) {
+  let osm = parseInt(document.getElementById('slider-osm').value);
+  if (Math.abs(atpase - activeCase.targetATPase) > 12 || Math.abs(glut4 - activeCase.targetGlut4) > 12 || Math.abs(osm - activeCase.targetOsm) > 12) {
     updateATPDisplay(20);
-    failMission('Desequilíbrio crítico nos gradientes iônicos ou na translocação de GLUT4.');
+    failMission('Desequilíbrio crítico nos gradientes iônicos, na osmolaridade ou na translocação de GLUT4 exigida pelo protocolo.');
   } else {
     document.getElementById('lock-1').className = 'padlock-status unlocked';
     document.getElementById('lock-1').innerText = 'Cadeado Aberto';
