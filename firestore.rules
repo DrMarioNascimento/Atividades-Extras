@@ -1,0 +1,46 @@
+rules_version = '2';
+
+/* Salas dos laboratórios (fisiologia/sala-firebase.js).
+   Professor: conta Google verificada presente em config/mestres.emails.
+   Equipe: sessão anônima, grava só o próprio documento, e só enquanto a sala está ativa. */
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function emailMestre() {
+      return signedIn() && request.auth.token.email is string && request.auth.token.email_verified == true
+        && exists(/databases/$(database)/documents/config/mestres)
+        && request.auth.token.email in get(/databases/$(database)/documents/config/mestres).data.emails;
+    }
+    function salaPath(id) { return /databases/$(database)/documents/salas/$(id); }
+    function mestre(id) { return signedIn() && exists(salaPath(id)) && get(salaPath(id)).data.mestreUid == request.auth.uid; }
+    function ativa(id) { return exists(salaPath(id)) && get(salaPath(id)).data.ativa == true; }
+    function nomeOk(d) { return d.nome is string && d.nome.size() > 0 && d.nome.size() <= 30; }
+    function camposEquipe() { return ['nome','entrouMs','atualizadoEmMs','status','fase','caso','casoTitulo','tentativas','motivo','inicioMs','fimMs']; }
+
+    match /config/mestres { allow read: if signedIn(); allow write: if false; }
+
+    match /salas/{id} {
+      allow create: if id.matches('^[A-HJ-NP-Z2-9]{6}$') && emailMestre()
+        && request.resource.data.keys().hasOnly(['lab','titulo','mestreUid','ativa','criadaEm','caso','cronometro','tempo'])
+        && request.resource.data.mestreUid == request.auth.uid
+        && request.resource.data.ativa == true
+        && request.resource.data.lab is string;
+      allow get: if signedIn() && (resource == null || resource.data.ativa == true || resource.data.mestreUid == request.auth.uid);
+      allow list: if false;
+      allow update: if mestre(id)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['caso','cronometro','tempo','ativa','encerradaEm'])
+        && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['cronometro']) || request.resource.data.cronometro in ['livre','on','off']);
+      allow delete: if false;
+
+      match /equipes/{uid} {
+        allow create: if signedIn() && request.auth.uid == uid && ativa(id)
+          && request.resource.data.keys().hasOnly(camposEquipe()) && nomeOk(request.resource.data);
+        allow update: if signedIn() && request.auth.uid == uid && ativa(id)
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(camposEquipe()) && nomeOk(request.resource.data);
+        allow get: if signedIn() && (request.auth.uid == uid || mestre(id));
+        allow list: if mestre(id);
+        allow delete: if false;
+      }
+    }
+  }
+}
