@@ -15,7 +15,7 @@ service cloud.firestore {
     function mestre(id) { return signedIn() && exists(salaPath(id)) && get(salaPath(id)).data.mestreUid == request.auth.uid; }
     function ativa(id) { return exists(salaPath(id)) && get(salaPath(id)).data.ativa == true; }
     function nomeOk(d) { return d.nome is string && d.nome.size() > 0 && d.nome.size() <= 30; }
-    function camposEquipe() { return ['nome','entrouMs','atualizadoEmMs','status','fase','caso','casoTitulo','tentativas','motivo','inicioMs','fimMs']; }
+    function camposEquipe() { return ['nome','avatar','falhas','entrouMs','atualizadoEmMs','status','fase','caso','casoTitulo','tentativas','motivo','inicioMs','fimMs']; }
 
     match /config/mestres { allow read: if signedIn(); allow write: if false; }
 
