@@ -3,6 +3,7 @@
   if (!L) return;
   let activeCase = null, timerInterval = null, timeLeft = 45, timerEnabled = false, missionCompleted = false;
   function $(id) { return document.getElementById(id); }
+  function sliderValue(id) { return parseInt($(id).value, 10); }
   function updateATPDisplay(val) {
     const bar = $('atp-bar'), text = $('atp-text');
     bar.style.width = val + '%';
@@ -21,7 +22,6 @@
   window.toggleTimerInput = function () {
     $('timer-input-wrapper').style.display = ($('timer-select').value === 'on') ? 'block' : 'none';
   };
-  function sliderValue(id) { return parseInt($(id).value, 10); }
   function drawCanvas(phaseIndex) {
     const canvas = $('canvas-p' + (phaseIndex + 1));
     if (!canvas) return;
@@ -34,26 +34,16 @@
     const vals = phase.sliders.map(s => sliderValue(s.id));
     const mean = vals.reduce((a, b) => a + b, 0) / vals.length;
     const mode = phase.canvas || 'wave';
-    if (activeCase && activeCase.targets && phaseIndex === 0) {
-      const target = activeCase.targets[phase.sliders[0].id];
-      if (typeof target === 'number') {
-        const targetY = canvas.height - (target / 100) * canvas.height;
-        ctx.strokeStyle = '#ef4444'; ctx.setLineDash([4, 4]);
-        ctx.beginPath(); ctx.moveTo(0, targetY); ctx.lineTo(canvas.width, targetY); ctx.stroke();
-        ctx.setLineDash([]);
-      }
-    }
     ctx.strokeStyle = '#3b82f6'; ctx.lineWidth = 2.5; ctx.beginPath();
     const baseline = canvas.height - 18;
     for (let x = 0; x < canvas.width; x++) {
       const t = x * 0.08; let y = baseline;
-      if (mode === 'bone') y = canvas.height - (mean / 100) * (canvas.height - 20) + Math.sin(t) * 4;
-      else if (mode === 'cardio') {
+      if (mode === 'cardio') {
         const beat = Math.max(0, Math.sin(t * (0.8 + vals[0] / 80)));
         y = baseline - Math.pow(beat, 6) * (40 + vals[1] * 0.4) - 20;
       } else if (mode === 'resp') y = baseline - 35 - Math.sin(t * (0.6 + vals[0] / 90)) * (18 + vals[1] * 0.25);
       else if (mode === 'fick') y = baseline - Math.min(1, x / (canvas.width * 0.7)) * (mean * 0.9) + Math.sin(t) * 3;
-      else y = canvas.height - (mean / 100) * canvas.height + Math.sin(t) * 6;
+      else y = canvas.height - (mean / 100) * (canvas.height - 20) + Math.sin(t) * 4;
       if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
     }
     ctx.stroke();
@@ -69,8 +59,7 @@
   };
   function startTimer(phaseNum, onExpire) {
     clearInterval(timerInterval);
-    const timerBox = $('timer-box-' + phaseNum);
-    const countdownEl = $('countdown-' + phaseNum);
+    const timerBox = $('timer-box-' + phaseNum), countdownEl = $('countdown-' + phaseNum);
     timerBox.classList.remove('hidden');
     countdownEl.innerText = timeLeft;
     let rem = timeLeft;
@@ -98,6 +87,12 @@
       if (Math.abs(sliderValue(s.id) - target) > tol) {
         return 'O ajuste de ' + s.short + ' ficou fora da faixa exigida pelo caso (' + target + ' ± ' + tol + ').';
       }
+    }
+    const vals = {};
+    L.phases.forEach(ph => ph.sliders.forEach(s => { vals[s.id] = sliderValue(s.id); }));
+    if (typeof L.consistency === 'function') {
+      const msg = L.consistency(phaseIndex, vals, activeCase);
+      if (msg) return msg;
     }
     return null;
   }
