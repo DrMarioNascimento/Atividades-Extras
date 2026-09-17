@@ -37,7 +37,7 @@
 <div class="card hidden" id="phase-2-card">
 <h2><span>Fase 2: Poiseuille e ortostase</span><span id="lock-2" class="padlock-status locked">Cadeado Fechado</span></h2>
 <div id="timer-box-2" class="timer-display hidden">Tempo Restante: <span id="countdown-2">45</span>s</div>
-<div class="instruction-box">O fluxo varia com a 4a potência do raio. Ajuste também a resposta ao ortostatismo.</div>
+<div class="instruction-box">O fluxo varia com a 4ª potência do raio. Neste laboratório a RPT relativa é acoplada ao raio por uma forma didática de Poiseuille: RPT ≈ 50 × (50/raio)². Ajuste também a resposta ao ortostatismo.</div>
 <div class="control-group"><label>Raio vascular efetivo (Poiseuille): <span id="val-raio">50</span>%</label><input type="range" id="raio" min="0" max="100" value="50" oninput="updateLabPreview(1)"></div>
 <div class="control-group"><label>Ajuste ortostático (barorreflexo): <span id="val-orto">50</span>%</label><input type="range" id="orto" min="0" max="100" value="50" oninput="updateLabPreview(1)"></div>
 <div style="font-size:0.8rem;color:var(--text-muted);margin-top:5px;">Estado atual: <strong id="waveform-label" style="color:var(--accent)">Circuito em espera</strong></div>
@@ -53,16 +53,25 @@ window.LAB = {
     { sliders: [{id:"raio", short:"raio (Poiseuille)", min:0, max:100, value:50},{id:"orto", short:"ajuste ortostático", min:0, max:100, value:50}], canvas:"cardio", status: vs => vs[1] >= 75 ? "Resposta ortostática reforçada" : vs[0] >= 70 ? "Vasodilatação predominante" : "Circuito em equilíbrio parcial" }
   ],
   cases: {
-    clinico1: { title:"Paciente A: Hipertensão arterial", desc:"PAM elevada por RPT alta. Não dispare débito; reduza o raio de forma controlada.", tolerance:12, targets:{dc:60, rpt:80, raio:40, orto:70} },
-    clinico2: { title:"Paciente B: Hipotensão / má perfusão", desc:"Eleve o débito e abra o raio o suficiente para recuperar o fluxo.", tolerance:12, targets:{dc:80, rpt:55, raio:70, orto:60} },
-    escolar1: { title:"Atleta 1: Exercício dinâmico", desc:"Alto débito com queda relativa da RPT e aumento do raio.", tolerance:12, targets:{dc:90, rpt:45, raio:75, orto:50} },
-    escolar2: { title:"Atleta 2: Ortostase após exercício", desc:"Ao erguer-se, preserve PAM com ajuste ortostático alto.", tolerance:12, targets:{dc:70, rpt:65, raio:55, orto:85} },
-    escolar3: { title:"Aluno C (Inclusão): Intolerância ortostática", desc:"Priorize o ajuste ortostático e evite vasodilatação excessiva.", tolerance:10, targets:{dc:65, rpt:60, raio:50, orto:80} },
-    escolar4: { title:"Aluno D (Inclusão): Sedentarismo", desc:"Débito ainda baixo e RPT um pouco alta. Reabilite sem extremos.", tolerance:10, targets:{dc:55, rpt:70, raio:50, orto:65} }
+    clinico1: { title:"Paciente A: Hipertensão arterial", desc:"PAM elevada por RPT alta. O raio deve ser coerente com Poiseuille (RPT alta ⇒ raio menor).", tolerance:12, targets:{dc:60, rpt:80, raio:40, orto:70} },
+    clinico2: { title:"Paciente B: Hipotensão / má perfusão", desc:"Eleve o débito e abra o raio. RPT baixa combina com vasodilatação (Poiseuille).", tolerance:12, targets:{dc:80, rpt:32, raio:65, orto:60} },
+    escolar1: { title:"Atleta 1: Exercício dinâmico", desc:"Alto débito e vasodilatação muscular. RPT cai quando o raio efetivo sobe.", tolerance:12, targets:{dc:90, rpt:28, raio:70, orto:50} },
+    escolar2: { title:"Atleta 2: Ortostase após exercício", desc:"Ao erguer-se, vasoconstrição reflexa: raio diminui e RPT sobe, com orto alto.", tolerance:12, targets:{dc:70, rpt:58, raio:46, orto:85} },
+    escolar3: { title:"Aluno C (Inclusão): Intolerância ortostática", desc:"Priorize o ajuste ortostático. Raio e RPT em faixa média e coerentes entre si.", tolerance:10, targets:{dc:65, rpt:50, raio:50, orto:80} },
+    escolar4: { title:"Aluno D (Inclusão): Sedentarismo", desc:"Débito ainda baixo e leve vasoconstrição (RPT um pouco alta, raio um pouco menor).", tolerance:10, targets:{dc:55, rpt:60, raio:46, orto:65} }
+  },
+  consistency: function (phaseIndex, vals) {
+    if (phaseIndex !== 1) return null;
+    const expected = Math.round(50 * Math.pow(50 / Math.max(vals.raio, 20), 2));
+    if (Math.abs(vals.rpt - expected) > 18) {
+      return "Poiseuille: RPT e raio não combinam. Neste laboratório RPT ≈ 50 × (50/raio)² (forma didática de 1/r⁴). Com raio " + vals.raio + " a RPT esperada é ≈ " + expected + ".";
+    }
+    return null;
   }
 };
 </script>
 <script src="operacao-lab-engine.js"></script>
 <script src="qr.js"></script>
 <script type="module" src="sala-firebase.js"></script>
-</body></html>
+</body>
+</html>

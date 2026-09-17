@@ -9,7 +9,7 @@
 <body>
 <div class="container">
 <p style="margin:0 0 12px;font-size:0.8rem;"><a href="./" style="color:#9ca3af;text-decoration:none;">← Operações de sala</a></p>
-<header><h1>Operação: Fick em Campo</h1><p>VO2 = DC x (CaO2 - CvO2)</p></header>
+<header><h1>Operação: Fick em Campo</h1><p>VO₂ = DC × (CaO₂ − CvO₂)</p></header>
 <div class="dashboard-top">
 <div class="metric-box"><span>Reserva de ATP integrativo</span><strong id="atp-text">100% (Estável)</strong><div class="atp-container"><div class="atp-bar" id="atp-bar"></div></div></div>
 <div class="metric-box"><span>Perfil do Caso</span><strong id="dash-case-name" style="font-size:0.85rem;color:var(--accent)">Aguardando Início</strong></div>
@@ -26,20 +26,20 @@
 <div><button class="btn-start" onclick="initLabSession()">Iniciar</button></div>
 </div>
 <div class="card hidden" id="phase-1-card">
-<h2><span>Fase 1: Débito e diferença a-vO2</span><span id="lock-1" class="padlock-status locked">Cadeado Fechado</span></h2>
+<h2><span>Fase 1: Débito e diferença a–vO₂</span><span id="lock-1" class="padlock-status locked">Cadeado Fechado</span></h2>
 <div id="timer-box-1" class="timer-display hidden">Tempo Restante: <span id="countdown-1">45</span>s</div>
-<div class="instruction-box" id="p1-objective">O consumo de oxigênio começa pelo produto DC x (CaO2 - CvO2).</div>
+<div class="instruction-box" id="p1-objective">O consumo de oxigênio começa pelo produto DC × (CaO₂ − CvO₂).</div>
 <div class="control-group"><label>Débito cardíaco relativo: <span id="val-dc">50</span>%</label><input type="range" id="dc" min="0" max="100" value="50" oninput="updateLabPreview(0)"></div>
-<div class="control-group"><label>Diferença arteriovenosa de O2: <span id="val-dav">50</span>%</label><input type="range" id="dav" min="0" max="100" value="50" oninput="updateLabPreview(0)"></div>
+<div class="control-group"><label>Diferença arteriovenosa de O₂: <span id="val-dav">50</span>%</label><input type="range" id="dav" min="0" max="100" value="50" oninput="updateLabPreview(0)"></div>
 <canvas id="canvas-p1"></canvas>
 <button class="btn-action" onclick="validatePhase1()">Validar o Fick basal e abrir cadeado</button>
 </div>
 <div class="card hidden" id="phase-2-card">
-<h2><span>Fase 2: Conteúdo de O2 e VO2</span><span id="lock-2" class="padlock-status locked">Cadeado Fechado</span></h2>
+<h2><span>Fase 2: Conteúdo de O₂ e VO₂</span><span id="lock-2" class="padlock-status locked">Cadeado Fechado</span></h2>
 <div id="timer-box-2" class="timer-display hidden">Tempo Restante: <span id="countdown-2">45</span>s</div>
-<div class="instruction-box">Feche o protocolo com Hb/CaO2 e o VO2 exigido pelo caso.</div>
-<div class="control-group"><label>Conteúdo arterial de O2 (Hb): <span id="val-hb">50</span>%</label><input type="range" id="hb" min="0" max="100" value="50" oninput="updateLabPreview(1)"></div>
-<div class="control-group"><label>VO2 relativo à demanda do caso: <span id="val-vo2">50</span>%</label><input type="range" id="vo2" min="0" max="100" value="50" oninput="updateLabPreview(1)"></div>
+<div class="instruction-box">Feche o protocolo com Hb/CaO₂ e o VO₂ exigido pelo caso. O VO₂ relativo deve obedecer Fick: VO₂ ≈ DC × (a–vO₂) / 100.</div>
+<div class="control-group"><label>Conteúdo arterial de O₂ (Hb): <span id="val-hb">50</span>%</label><input type="range" id="hb" min="0" max="100" value="50" oninput="updateLabPreview(1)"></div>
+<div class="control-group"><label>VO₂ relativo à demanda do caso: <span id="val-vo2">50</span>%</label><input type="range" id="vo2" min="0" max="100" value="50" oninput="updateLabPreview(1)"></div>
 <div style="font-size:0.8rem;color:var(--text-muted);margin-top:5px;">Estado atual: <strong id="waveform-label" style="color:var(--accent)">Fick em espera</strong></div>
 <canvas id="canvas-p2"></canvas>
 <button class="btn-action" onclick="validatePhase2()">Confirmar Fick em campo e abrir cadeado</button>
@@ -53,16 +53,25 @@ window.LAB = {
     { sliders: [{id:"hb", short:"conteúdo de O2", min:0, max:100, value:50},{id:"vo2", short:"VO2", min:0, max:100, value:50}], canvas:"fick", status: vs => vs[1] >= 80 ? "VO2 elevado" : vs[0] < 45 ? "CaO2 limitado" : "Equilíbrio Fick intermediário" }
   ],
   cases: {
-    clinico1: { title:"Paciente A: Insuficiência cardíaca", desc:"Débito baixo. A extração sobe para compensar; o VO2 permanece moderado.", tolerance:12, targets:{dc:45, dav:70, hb:60, vo2:50} },
-    clinico2: { title:"Paciente B: Anemia", desc:"CaO2 reduzido. Compense com débito um pouco alto, sem VO2 de atleta.", tolerance:12, targets:{dc:75, dav:55, hb:35, vo2:55} },
-    escolar1: { title:"Atleta 1: VO2 máximo", desc:"Alto DC, alta extração, Hb preservada e VO2 no teto.", tolerance:12, targets:{dc:90, dav:85, hb:70, vo2:90} },
-    escolar2: { title:"Atleta 2: Trabalho submáximo", desc:"Fick em ritmo de jogo. Valores altos, mas abaixo do máximo.", tolerance:12, targets:{dc:80, dav:75, hb:65, vo2:80} },
-    escolar3: { title:"Aluno C (Inclusão): Baixa aptidão", desc:"Não force extração nem VO2 de atleta.", tolerance:10, targets:{dc:55, dav:50, hb:60, vo2:45} },
-    escolar4: { title:"Aluno D (Inclusão): Retorno ao treino", desc:"Reabilitação. Suba DC e VO2 com segurança.", tolerance:10, targets:{dc:60, dav:55, hb:60, vo2:55} }
+    clinico1: { title:"Paciente A: Insuficiência cardíaca", desc:"Débito baixo. A extração sobe para compensar. VO₂ deve obedecer Fick: VO₂ ≈ DC × (a–v) / 100.", tolerance:12, targets:{dc:45, dav:70, hb:60, vo2:32} },
+    clinico2: { title:"Paciente B: Anemia", desc:"CaO₂ reduzido. Compense com débito um pouco alto. VO₂ ≈ DC × (a–v) / 100.", tolerance:12, targets:{dc:75, dav:55, hb:35, vo2:41} },
+    escolar1: { title:"Atleta 1: VO2 máximo", desc:"Alto DC e alta extração. O VO₂ tem de fechar a equação de Fick.", tolerance:12, targets:{dc:90, dav:85, hb:70, vo2:77} },
+    escolar2: { title:"Atleta 2: Trabalho submáximo", desc:"Ritmo de jogo, abaixo do máximo e coerente com Fick.", tolerance:12, targets:{dc:80, dav:75, hb:65, vo2:60} },
+    escolar3: { title:"Aluno C (Inclusão): Baixa aptidão", desc:"Protocolo conservador. VO₂ acompanha DC × extração.", tolerance:10, targets:{dc:55, dav:50, hb:60, vo2:28} },
+    escolar4: { title:"Aluno D (Inclusão): Retorno ao treino", desc:"Reabilitação. O VO₂ segue Fick.", tolerance:10, targets:{dc:60, dav:55, hb:60, vo2:33} }
+  },
+  consistency: function (phaseIndex, vals) {
+    if (phaseIndex !== 1) return null;
+    const expected = Math.round((vals.dc * vals.dav) / 100);
+    if (Math.abs(vals.vo2 - expected) > 12) {
+      return "Inconsistência de Fick: VO₂ relativo deve ser ≈ DC × (a–vO₂) / 100. Com os sliders atuais o esperado é " + expected + " (você pôs " + vals.vo2 + ").";
+    }
+    return null;
   }
 };
 </script>
 <script src="operacao-lab-engine.js"></script>
 <script src="qr.js"></script>
 <script type="module" src="sala-firebase.js"></script>
-</body></html>
+</body>
+</html>
