@@ -44,3 +44,9 @@ Configuração única no console do Firebase:
 3. Authentication → Settings → Domínios autorizados → `drmarionascimento.github.io`.
 4. Firestore → criar o documento `config/mestres` com o campo `emails` (array) contendo o e-mail do professor.
 5. Publicar as regras (republicar sempre que `firestore.rules` mudar): `npx firebase-tools deploy --only firestore:rules` (ou colar `firestore.rules` em Firestore → Regras).
+
+## Licença e uso
+
+Este repositório é disponibilizado para uso educacional e demonstração não comercial. A publicação no GitHub não autoriza copiar, adaptar, redistribuir, republicar, hospedar em outro endereço ou explorar comercialmente o código, as atividades ou os materiais. Consulte [LICENSE.md](LICENSE.md).
+
+**Autor:** Mário César Nascimento, PhD.
