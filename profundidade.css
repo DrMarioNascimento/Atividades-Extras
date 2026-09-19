@@ -1,0 +1,194 @@
+/* ATIVIDADES EXTRAS — PROFUNDIDADE
+   O padrão único de volume físico dos botões e caixas. É o mesmo do MOSAICO
+   (Dragon/v1/css/profundidade.css): quem mexe aqui deve ler o cabeçalho de lá.
+
+   QUATRO CAMADAS, nesta ordem:
+     1. inset 0 1px 0 <clara>          fio de luz na aresta de cima
+     2. inset 0 -2px 0 <escura>        a face curva para baixo
+     3. 0 <parede>px 0 <sólida>        a PAREDE lateral, sem desfoque: é a altura
+     4. 0 <parede+1>px 0 1px <funda>   fio de 1px fechando o contorno
+        + 0 <parede+5>px <blur> ...    e a sombra no chão, essa sim mole
+
+   Ao pressionar: translateY(curso) e a parede cai para 1px. Curso = parede − 1.
+   A sombra do chão encolhe mas não some — sumir lê como "desligado".
+
+   ESCALA (mexer só nos tokens):
+     botão de ação    parede 5, curso 4
+     caixa clicável   parede 4, curso 3
+     botão pequeno    parede 3, curso 2
+     caixa de fundo   parede 3, SEM curso — é o continente, fica mais baixa
+                      que o botão que carrega, e não afunda porque não se clica.
+
+   AS REGRAS QUE JÁ ERRAMOS:
+   - Em fundo escuro a parede é MAIS CLARA que o fundo (é uma face iluminada,
+     não uma sombra): preto sobre preto não existe. Em fundo claro (a sala,
+     no papel do Laboratório do Pesquisador) ela é o tom escuro da família.
+   - A parede não ocupa espaço: quem tem parede precisa de parede + 6px de
+     folga embaixo, senão o vizinho cobre o degrau.
+   - Profundidade não se escreve em <style> injetado por JavaScript. A camada
+     da página declara a classe; altura e parede saem daqui.
+   - :hover só dentro de (hover:hover) — no celular ele gruda.
+   - Botão desligado fica plano. O "fantasma" (voltar, fechar) não tem parede. */
+
+:root{
+  --parede:5px;     --curso:4px;
+  --parede-cx:4px;  --curso-cx:3px;
+  --parede-sm:3px;  --curso-sm:2px;
+}
+
+/* ---------- famílias: cor da parede (p) e do fio de contorno (pf) ------ */
+/* Laboratórios e índices: fundo #070e15 / #080c14. Todas mais claras. */
+.btn-start                     { --p:#046c4c; --pf:#012a1e }   /* verde */
+.btn-action                    { --p:#1e4bb0; --pf:#0b1d4a }   /* azul */
+a.btn,button.btn               { --p:#23897b; --pf:#0b3b35 }   /* ciano dos índices */
+a.ghost,button.ghost           { --p:#26394a; --pf:#0a131b }   /* neutro */
+.card,.metric-box,.setup-bar,.modal-box,
+.unit,.units article,.grid article,.gate-box
+                               { --p:#1c2a3a; --pf:#060b11 }   /* caixas de fundo */
+.modal-box.success             { --p:#04553c; --pf:#012a1e }
+.modal-box.failure             { --p:#6e1a1a; --pf:#2e0909 }
+
+/* Sala (papel, verde e dourado). Fundo claro: parede é o tom escuro. */
+.ae-gold                       { --p:#7a5a22; --pf:#4a3512 }
+.ae-primary                    { --p:#0a1f18; --pf:#030a08 }
+.ae-secondary,#aeSalaBtn,.ae-emoji button
+                               { --p:#b8a57a; --pf:#8a7852 }
+.ae-danger                     { --p:#5a2219; --pf:#2e100b }
+.ae-card,.ae-pl,.ae-grid-wrap  { --p:#d6c8a4; --pf:#b3a37c }
+.ae-pl.aberto                  { --p:#9cc3ad; --pf:#6f9a83 }
+.ae-pl.fechado                 { --p:#d8aea3; --pf:#b3867a }
+.ae-eq                         { --p:#c9b98c; --pf:#9e8f66 }
+.ae-eq.st-andamento            { --p:#c99b45; --pf:#9c7936 }
+.ae-eq.st-concluiu             { --p:#8dbba1; --pf:#5f8f75 }
+.ae-eq.st-falhou               { --p:#cf9587; --pf:#a86a5c }
+
+/* ---------- botão de ação: parede 5 ----------------------------------- */
+.btn-start,.btn-action,a.btn,button.btn,
+.ae-gold,.ae-primary,.ae-secondary,.ae-danger{
+  transition:transform .15s ease,box-shadow .15s ease,background .25s ease,border-color .25s ease;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.22),
+    inset 0 -2px 0 rgba(0,0,0,.22),
+    0 var(--parede) 0 var(--p),
+    0 calc(var(--parede) + 1px) 0 1px var(--pf),
+    0 calc(var(--parede) + 5px) 14px rgba(0,0,0,.40);
+}
+.btn-start:active:not(:disabled),.btn-action:active:not(:disabled),a.btn:active,button.btn:active:not(:disabled),
+.ae-gold:active:not(:disabled),.ae-primary:active:not(:disabled),.ae-secondary:active:not(:disabled),.ae-danger:active:not(:disabled){
+  transform:translateY(var(--curso));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.12),
+    inset 0 -1px 0 rgba(0,0,0,.20),
+    0 1px 0 var(--p),
+    0 2px 0 1px var(--pf),
+    0 3px 7px rgba(0,0,0,.30);
+}
+
+/* ---------- botão pequeno: parede 3 ----------------------------------- */
+/* Vem depois do botão de ação: .ae-sm e .ghost empatam em especificidade e
+   vencem pela ordem. */
+a.ghost,button.ghost,.ae-sm,#aeSalaBtn,.ae-emoji button{
+  transition:transform .15s ease,box-shadow .15s ease,background .25s ease,border-color .25s ease;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.18),
+    inset 0 -1px 0 rgba(0,0,0,.18),
+    0 var(--parede-sm) 0 var(--p),
+    0 calc(var(--parede-sm) + 1px) 0 1px var(--pf),
+    0 calc(var(--parede-sm) + 4px) 10px rgba(0,0,0,.32);
+}
+a.ghost:active,button.ghost:active:not(:disabled),.ae-sm:active:not(:disabled),#aeSalaBtn:active,.ae-emoji button:active{
+  transform:translateY(var(--curso-sm));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.10),
+    0 1px 0 var(--p),
+    0 2px 0 1px var(--pf),
+    0 3px 6px rgba(0,0,0,.26);
+}
+
+/* ---------- caixa clicável: parede 4 (cartões das equipes) ------------ */
+.ae-eq{
+  transition:transform .15s ease,box-shadow .15s ease,background .25s ease,border-color .25s ease;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.85),
+    inset 0 -1px 0 rgba(15,46,36,.10),
+    0 var(--parede-cx) 0 var(--p),
+    0 calc(var(--parede-cx) + 1px) 0 1px var(--pf),
+    0 calc(var(--parede-cx) + 4px) 12px rgba(15,46,36,.22);
+}
+.ae-eq:active{
+  transform:translateY(var(--curso-cx));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.6),
+    0 1px 0 var(--p),
+    0 2px 0 1px var(--pf),
+    0 3px 7px rgba(15,46,36,.18);
+}
+
+/* ---------- caixa de fundo: parede 3, sem curso ----------------------- */
+.card,.metric-box,.setup-bar,.modal-box,.unit,.units article,.grid article,.gate-box{
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.05),
+    0 var(--parede-sm) 0 var(--p),
+    0 calc(var(--parede-sm) + 1px) 0 1px var(--pf),
+    0 calc(var(--parede-sm) + 6px) 16px rgba(0,0,0,.34);
+}
+.ae-card,.ae-pl,.ae-grid-wrap{
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.85),
+    0 var(--parede-sm) 0 var(--p),
+    0 calc(var(--parede-sm) + 1px) 0 1px var(--pf),
+    0 calc(var(--parede-sm) + 6px) 16px rgba(15,46,36,.14);
+}
+/* O cartão da unidade carrega os artigos: é o continente, e os artigos
+   dentro dele ficam planos para não passarem à frente dele. */
+.unit article{box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+
+/* ---------- estados que não afundam ----------------------------------- */
+.btn-start:disabled,.btn-action:disabled,button.btn:disabled,button.ghost:disabled,
+.ae-gold:disabled,.ae-primary:disabled,.ae-secondary:disabled,.ae-danger:disabled,.ae-sm:disabled{
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+  transform:none;
+}
+
+/* ---------- vizinhança ------------------------------------------------- */
+@media (hover:hover) and (pointer:fine){
+  .btn-start:hover:not(:disabled),.btn-action:hover:not(:disabled),a.btn:hover,button.btn:hover:not(:disabled),
+  .ae-gold:hover:not(:disabled),.ae-primary:hover:not(:disabled),.ae-secondary:hover:not(:disabled),.ae-danger:hover:not(:disabled){
+    transform:translateY(-2px);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.26),
+      inset 0 -2px 0 rgba(0,0,0,.22),
+      0 calc(var(--parede) + 2px) 0 var(--p),
+      0 calc(var(--parede) + 3px) 0 1px var(--pf),
+      0 calc(var(--parede) + 9px) 20px rgba(0,0,0,.42);
+  }
+  /* Os pequenos também carregam .btn/.ae-secondary: sem isto herdariam a
+     parede 7 do hover do botão de ação. */
+  a.ghost:hover,button.ghost:hover:not(:disabled),.ae-sm:hover:not(:disabled){
+    transform:translateY(-1px);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.22),
+      0 calc(var(--parede-sm) + 1px) 0 var(--p),
+      0 calc(var(--parede-sm) + 2px) 0 1px var(--pf),
+      0 calc(var(--parede-sm) + 6px) 14px rgba(0,0,0,.34);
+  }
+  .ae-eq:hover{
+    transform:translateY(-2px);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.9),
+      0 calc(var(--parede-cx) + 2px) 0 var(--p),
+      0 calc(var(--parede-cx) + 3px) 0 1px var(--pf),
+      0 calc(var(--parede-cx) + 8px) 18px rgba(15,46,36,.26);
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  .btn-start,.btn-action,a.btn,button.btn,a.ghost,button.ghost,.ae-btn,.ae-eq,#aeSalaBtn,.ae-emoji button{
+    transition:background .25s ease,border-color .25s ease;
+  }
+}
+
+/* ---------- o fantasma não afunda ------------------------------------- */
+/* No fim de propósito: empata em especificidade e vence pela ordem. */
+.ae-ghost{box-shadow:none}
+.ae-ghost:active:not(:disabled){transform:none;box-shadow:none}
+@media (hover:hover) and (pointer:fine){ .ae-ghost:hover:not(:disabled){transform:none;box-shadow:none} }
