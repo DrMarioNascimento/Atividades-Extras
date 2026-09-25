@@ -1,15 +1,17 @@
-# Atividades extras
+# Atividades Extras
 
-Uma **pasta por disciplina**. A publicação é sempre a branch `main` (GitHub Pages).
+Missões complementares para as disciplinas do autor. Uma **pasta por disciplina**. A publicação é sempre a branch `main` (GitHub Pages).
+
+**Entrar:** [drmarionascimento.github.io/Atividades-Extras](https://drmarionascimento.github.io/Atividades-Extras/)
 
 ```
 Atividades-Extras/
   index.html              ← porta de todas as disciplinas
   README.md
-  fisiologia/             ← só extras de Fisiologia
+  LICENSE.md
+  fisiologia/             ← extras de Fisiologia
     index.html
-    Operacao-Alveolo-Seguro.html
-    Operacao-Alveolo-Seguro-sem-cronometro.html
+    Operacao-*.html
   etica/                  ← quando houver
   pesquisa/               ← quando houver
 ```
@@ -18,17 +20,17 @@ Não use uma branch com o nome da disciplina. Branch `Fisiologia` parece pasta n
 
 ## Fisiologia
 
-- [Pasta](https://drmarionascimento.github.io/Atividades-Extras/fisiologia/)
+- [Pasta da disciplina](https://drmarionascimento.github.io/Atividades-Extras/fisiologia/)
 - [Alvéolo Seguro](https://drmarionascimento.github.io/Atividades-Extras/fisiologia/Operacao-Alveolo-Seguro.html)
 - [Alvéolo Seguro sem cronômetro](https://drmarionascimento.github.io/Atividades-Extras/fisiologia/Operacao-Alveolo-Seguro-sem-cronometro.html)
 
-Missões novas desta matéria entram em `fisiologia/`. Outra disciplina = pasta nova no mesmo nível (`etica/`, `pesquisa/`…).
+Há outras operações na mesma pasta, entre elas Circuito Fechado, Fick em Campo, Fisiologia Celular, Matriz Óssea, Membrana Sitiada, Sistema Muscular e Unidade Motora. Missões novas desta matéria entram em `fisiologia/`. Outra disciplina = pasta nova no mesmo nível (`etica/`, `pesquisa/`…).
 
-Autor: Mário César Nascimento.
+Relacionados: [Fisiologia Interativa](https://github.com/DrMarioNascimento/fisiologia-interativa) e [Fisiologia em Fuga](https://github.com/DrMarioNascimento/fisiologia-em-fuga).
 
 ## Salas com QR (Firebase)
 
-Os sete laboratórios de `fisiologia/` abrem pela sala, no formato do Laboratório do Pesquisador (Learning-lab/delineamentos):
+Os laboratórios de `fisiologia/` abrem pela sala, no formato do Laboratório do Pesquisador (Learning-lab/delineamentos):
 
 - **Início:** *Entrar na sala* (equipes) e *🔒 Módulo do Professor* (Google; a conta precisa estar em `config/mestres` → `emails`).
 - **Professor:** *Criar sessão* abre o **Painel do Professor**: grade de cartões das equipes (emoji, nome, caso, cadeados) e o placar da partida — **cadeados abertos**, **cadeados fechados** e equipes que concluíram. *Código · QR* abre o modal com QR, link e *Encerrar sessão*; *Configurar* fixa caso e cronômetro para todas. Tocar num cartão mostra tentativas, quantas vezes o cadeado fechou e o último diagnóstico.
@@ -45,8 +47,10 @@ Configuração única no console do Firebase:
 4. Firestore → criar o documento `config/mestres` com o campo `emails` (array) contendo o e-mail do professor.
 5. Publicar as regras (republicar sempre que `firestore.rules` mudar): `npx firebase-tools deploy --only firestore:rules` (ou colar `firestore.rules` em Firestore → Regras).
 
+## Autoria
+
+**Autor e titular declarado:** Mário César Nascimento, PhD.
+
 ## Licença e uso
 
 Este repositório é disponibilizado para uso educacional e demonstração não comercial. A publicação no GitHub não autoriza copiar, adaptar, redistribuir, republicar, hospedar em outro endereço ou explorar comercialmente o código, as atividades ou os materiais. Consulte [LICENSE.md](LICENSE.md).
-
-**Autor:** Mário César Nascimento, PhD.
