@@ -1,5 +1,7 @@
 # Atividades Extras
 
+**Estado em 7 de outubro de 2026.** Só a pasta `fisiologia/` está publicada. `etica/` e `pesquisa/` ainda não existem. Licença de uso educacional restrito, revisão nesta data: repositório público não é código aberto.
+
 Missões complementares para as disciplinas do autor. Uma **pasta por disciplina**. A publicação é sempre a branch `main` (GitHub Pages).
 
 **Entrar:** [drmarionascimento.github.io/Atividades-Extras](https://drmarionascimento.github.io/Atividades-Extras/)
@@ -9,11 +11,11 @@ Atividades-Extras/
   index.html              ← porta de todas as disciplinas
   README.md
   LICENSE.md
-  fisiologia/             ← extras de Fisiologia
+  fisiologia/             ← extras de Fisiologia (no ar)
     index.html
     Operacao-*.html
-  etica/                  ← quando houver
-  pesquisa/               ← quando houver
+  etica/                  ← ainda não criada
+  pesquisa/               ← ainda não criada
 ```
 
 Não use uma branch com o nome da disciplina. Branch `Fisiologia` parece pasta no GitHub, mas o site lê a `main`.
@@ -34,7 +36,7 @@ Vitrine: [drmarionascimento.github.io/Atividades-Extras/fisiologia/](https://drm
 
 As versões avulsas (`com-cronometro`, `sem-cronometro` e a versão simples) continuam na pasta para não quebrar links e QR antigos. `Operacao-Membrana-Sitiada*.html` é uma versão anterior, fora da vitrine. Missões novas desta matéria entram em `fisiologia/`. Outra disciplina = pasta nova no mesmo nível (`etica/`, `pesquisa/`…).
 
-Relacionados: [Fisiologia Interativa](https://github.com/DrMarioNascimento/fisiologia-interativa) e [Fisiologia em Fuga](https://github.com/DrMarioNascimento/fisiologia-em-fuga).
+Relacionados: [Fisiologia Interativa](https://github.com/DrMarioNascimento/fisiologia-interativa), [Fisiologia em Fuga](https://github.com/DrMarioNascimento/fisiologia-em-fuga) e [Eita!](https://eita-quiz.web.app/) (quiz-batalha, repositório privado).
 
 ## Salas com QR (Firebase)
 
@@ -63,4 +65,4 @@ Configuração única no console do Firebase:
 
 ## Licença e uso
 
-Este repositório é disponibilizado para uso educacional e demonstração não comercial. A publicação no GitHub não autoriza copiar, adaptar, redistribuir, republicar, hospedar em outro endereço ou explorar comercialmente o código, as atividades ou os materiais. Consulte [LICENSE.md](LICENSE.md).
+Este repositório é disponibilizado para uso educacional e demonstração não comercial. A publicação no GitHub não autoriza copiar, adaptar, redistribuir, republicar, hospedar em outro endereço ou explorar comercialmente o código, as atividades ou os materiais. Consulte [LICENSE.md](LICENSE.md). Revisão documental desta nota: 7 de outubro de 2026.
