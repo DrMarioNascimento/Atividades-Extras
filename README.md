@@ -1,5 +1,12 @@
 # Atividades Extras
 
+## Estado e manutenção — 10 de outubro de 2026
+
+O repositório contém a entrada geral e as missões em `fisiologia/`. As frentes de Ética e Pesquisa indicadas na organização são propostas, não pastas já implementadas.
+
+As atividades individuais usam páginas estáticas. As salas compartilhadas dependem de Firebase/Firestore e de suas regras de acesso. Publicar o HTML e publicar as regras são etapas diferentes; para verificar uma sala, confira entrada por QR, participação em dois aparelhos, encerramento e acesso aos resultados. Não há uma suíte automatizada de testes nem workflow de CI neste repositório nesta revisão.
+
+
 **Estado em 7 de outubro de 2026.** Só a pasta `fisiologia/` está publicada. `etica/` e `pesquisa/` ainda não existem. Licença de uso educacional restrito, revisão nesta data: repositório público não é código aberto.
 
 Missões complementares para as disciplinas do autor. Uma **pasta por disciplina**. A publicação é sempre a branch `main` (GitHub Pages).

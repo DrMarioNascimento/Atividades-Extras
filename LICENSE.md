@@ -46,3 +46,11 @@ As atividades são disponibilizadas para finalidades educacionais e demonstrativ
 A vinculação profissional do autor ao CEFID/UDESC é informação acadêmica e não identifica a Universidade como autora, titular ou licenciadora deste repositório.
 
 Todos os direitos não expressamente concedidos permanecem reservados ao titular.
+
+---
+
+## Nota editorial — 10 de outubro de 2026
+
+A documentação distingue as atividades implementadas em Fisiologia das frentes de Ética e Pesquisa ainda propostas.
+
+Esta nota registra a revisão da documentação. Não altera as cláusulas anteriores, os titulares, as permissões, as restrições nem as licenças próprias de terceiros.
