@@ -1,5 +1,12 @@
 # Atividades Extras
 
+## Recursos educacionais
+
+Este projeto integra os recursos educacionais do Prof. Mário César Nascimento, PhD. O acesso aos materiais disponibilizados permanece aberto ao público, conforme [LICENSE.md](LICENSE.md). Recursos de Fisiologia têm finalidade educacional e não substituem diagnóstico, prescrição nem orientação clínica individual.
+
+Portal do autor: https://www.drmarionascimento.com.br/
+
+
 ## Estado e manutenção — 10 de outubro de 2026
 
 O repositório contém a entrada geral e as missões em `fisiologia/`. As frentes de Ética e Pesquisa indicadas na organização são propostas, não pastas já implementadas.
