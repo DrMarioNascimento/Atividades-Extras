@@ -18,7 +18,7 @@ As atividades individuais usam páginas estáticas. As salas compartilhadas depe
 
 Missões complementares para as disciplinas do autor. Uma **pasta por disciplina**. A publicação é sempre a branch `main` (GitHub Pages).
 
-**Entrar:** [drmarionascimento.github.io/Atividades-Extras](https://drmarionascimento.github.io/Atividades-Extras/)
+**Entrar:** [atividades-extras.drmarionascimento.com.br](https://atividades-extras.drmarionascimento.com.br/)
 
 ```
 Atividades-Extras/
@@ -36,7 +36,7 @@ Não use uma branch com o nome da disciplina. Branch `Fisiologia` parece pasta n
 
 ## Fisiologia
 
-Vitrine: [drmarionascimento.github.io/Atividades-Extras/fisiologia/](https://drmarionascimento.github.io/Atividades-Extras/fisiologia/)
+Vitrine: [atividades-extras.drmarionascimento.com.br/fisiologia/](https://atividades-extras.drmarionascimento.com.br/fisiologia/)
 
 | Laboratório | Arquivo de entrada | Versões avulsas |
 |---|---|---|
@@ -50,7 +50,7 @@ Vitrine: [drmarionascimento.github.io/Atividades-Extras/fisiologia/](https://drm
 
 As versões avulsas (`com-cronometro`, `sem-cronometro` e a versão simples) continuam na pasta para não quebrar links e QR antigos. `Operacao-Membrana-Sitiada*.html` é uma versão anterior, fora da vitrine. Missões novas desta matéria entram em `fisiologia/`. Outra disciplina = pasta nova no mesmo nível (`etica/`, `pesquisa/`…).
 
-Relacionados: [Fisiologia Interativa](https://github.com/DrMarioNascimento/fisiologia-interativa), [Fisiologia em Fuga](https://github.com/DrMarioNascimento/fisiologia-em-fuga) e [Eita!](https://eita-quiz.web.app/) (quiz-batalha, repositório privado).
+Relacionados: [Fisiologia Interativa](https://github.com/DrMarioNascimento/fisiologia-interativa), [Fisiologia em Fuga](https://github.com/DrMarioNascimento/fisiologia-em-fuga) e [Eita!](https://eita.dragongames.dev.br/) (quiz-batalha, repositório privado).
 
 ## Salas com QR (Firebase)
 
