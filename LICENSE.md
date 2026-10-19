@@ -47,16 +47,14 @@ A vinculação profissional do autor ao CEFID/UDESC é informação acadêmica e
 
 Todos os direitos não expressamente concedidos permanecem reservados ao titular.
 
----
-
-## Nota editorial — 10 de outubro de 2026
-
-A documentação distingue as atividades implementadas em Fisiologia das frentes de Ética e Pesquisa ainda propostas.
-
-Esta nota registra a revisão da documentação. Não altera as cláusulas anteriores, os titulares, as permissões, as restrições nem as licenças próprias de terceiros.
-
 ## Endereço de apresentação — 14 de outubro de 2026
 
 O portal de apresentação do autor usa o endereço abaixo. Este endereço não altera a hospedagem própria do recurso, a titularidade ou as permissões desta licença.
 
 https://www.drmarionascimento.com.br/
+
+## Revisão documental — 19 de outubro de 2026
+
+O escopo implementado permanece nas missões de Fisiologia. Referências a Ética, Pesquisa ou a novas unidades em outros projetos não declaram a existência de atividades equivalentes neste repositório.
+
+Esta revisão atualiza a identificação e o escopo documental. Preserva os titulares, as permissões e as restrições existentes. Não substitui nem restringe as licenças próprias de componentes de terceiros.

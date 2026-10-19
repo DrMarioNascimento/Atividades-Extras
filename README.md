@@ -1,5 +1,9 @@
 # Atividades Extras
 
+## Situação atual — 19 de outubro de 2026
+
+As missões implementadas continuam em `fisiologia/`; Ética e Pesquisa são frentes propostas. Os sete laboratórios compartilham o acesso de sala em `fisiologia/sala-firebase.js`. A unidade endócrina adicionada à Fisiologia Interativa não implica que uma missão endócrina já exista aqui. O domínio oficial está em [CNAME](CNAME).
+
 ## Recursos educacionais
 
 Este projeto integra os recursos educacionais do Prof. Mário César Nascimento, PhD. O acesso aos materiais disponibilizados permanece aberto ao público, conforme [LICENSE.md](LICENSE.md). Recursos de Fisiologia têm finalidade educacional e não substituem diagnóstico, prescrição nem orientação clínica individual.
@@ -7,7 +11,7 @@ Este projeto integra os recursos educacionais do Prof. Mário César Nascimento,
 Portal do autor: https://www.drmarionascimento.com.br/
 
 
-## Estado e manutenção — 10 de outubro de 2026
+## Registro anterior de manutenção — 10 de outubro de 2026
 
 O repositório contém a entrada geral e as missões em `fisiologia/`. As frentes de Ética e Pesquisa indicadas na organização são propostas, não pastas já implementadas.
 
@@ -50,7 +54,7 @@ Vitrine: [atividades-extras.drmarionascimento.com.br/fisiologia/](https://ativid
 
 As versões avulsas (`com-cronometro`, `sem-cronometro` e a versão simples) continuam na pasta para não quebrar links e QR antigos. `Operacao-Membrana-Sitiada*.html` é uma versão anterior, fora da vitrine. Missões novas desta matéria entram em `fisiologia/`. Outra disciplina = pasta nova no mesmo nível (`etica/`, `pesquisa/`…).
 
-Relacionados: [Fisiologia Interativa](https://github.com/DrMarioNascimento/fisiologia-interativa), [Fisiologia em Fuga](https://github.com/DrMarioNascimento/fisiologia-em-fuga) e [Eita!](https://eita.dragongames.dev.br/) (quiz-batalha, repositório privado).
+Relacionados: [Fisiologia Interativa](https://github.com/DrMarioNascimento/fisiologia-interativa), [Fisiologia em Fuga](https://github.com/DrMarioNascimento/fisiologia-em-fuga) e [Eita!](https://eita.dragongames.dev.br/) (quiz-batalha, em testes internos).
 
 ## Salas com QR (Firebase)
 
@@ -69,7 +73,7 @@ Configuração única no console do Firebase:
 
 1. Firestore Database → criar o banco.
 2. Authentication → Sign-in method → ativar **Google** e **Anônimo**.
-3. Authentication → Settings → Domínios autorizados → `drmarionascimento.github.io`.
+3. Authentication → Settings → Domínios autorizados → `atividades-extras.drmarionascimento.com.br` (e demais domínios efetivamente utilizados).
 4. Firestore → criar o documento `config/mestres` com o campo `emails` (array) contendo o e-mail do professor.
 5. Publicar as regras (republicar sempre que `firestore.rules` mudar): `npx firebase-tools deploy --only firestore:rules` (ou colar `firestore.rules` em Firestore → Regras).
 
