@@ -44,7 +44,7 @@ function showModal(type, icon, title, text) {
   let modal = document.getElementById('custom-modal');
   let box = document.getElementById('modal-box-content');
   box.className = 'modal-box ' + type;
-  document.getElementById('modal-icon').innerText = icon;
+  { const target = document.getElementById('modal-icon'); if (icon === '🔒') target.innerHTML = '<img src="../assets/icons/locks/closed-white.png" alt="" aria-hidden="true" style="display:inline-block;width:1.5em;height:1.5em;max-width:none;object-fit:contain;vertical-align:middle;flex-shrink:0">'; else target.innerText = icon; }
   document.getElementById('modal-title').innerText = title;
   document.getElementById('modal-text').innerHTML = text;
   modal.classList.add('active');
@@ -178,6 +178,6 @@ function validatePhase2() {
     document.getElementById('phase-2-card').style.opacity = '0.6';
     document.getElementById('global-status').innerText = 'Sucesso Total';
     document.getElementById('global-status').style.color = 'var(--success)';
-    showModal('success', '🏆', 'Parabéns! Eletrofisiologia Validada', 'O estudo de caso para <strong>' + activeCase.title + '</strong> foi concluído com êxito.<br><br>🔓 <strong>Cadeado Aberto!</strong> Cinética de canais dependentes de voltagem, limiar e repolarização validados.');
+    showModal('success', '🏆', 'Parabéns! Eletrofisiologia Validada', 'O estudo de caso para <strong>' + activeCase.title + '</strong> foi concluído com êxito.<br><br><img src="../assets/icons/locks/open-white.png" alt="" aria-hidden="true" style="display:inline-block;width:2.1em;height:2.1em;max-width:none;object-fit:contain;vertical-align:middle;flex-shrink:0"> <strong>Cadeado Aberto!</strong> Cinética de canais dependentes de voltagem, limiar e repolarização validados.');
   }
 }

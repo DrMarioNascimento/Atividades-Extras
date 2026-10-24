@@ -180,7 +180,7 @@ function inicio(msg = '') {
   ${msg ? `<div class="ae-erro">${esc(msg)}</div>` : ''}
   <div class="ae-actions">
     <button class="ae-btn ae-gold ae-block" id="aeEntrar">Entrar na sala</button>
-    <button class="ae-btn ae-secondary ae-block" id="aeProf"><span aria-hidden="true">🔒</span><span>Módulo do Professor</span></button>
+    <button class="ae-btn ae-secondary ae-block" id="aeProf"><span aria-hidden="true"><img src="../assets/icons/locks/closed-blue.png" alt="" aria-hidden="true" style="display:inline-block;width:1.7em;height:1.7em;max-width:none;object-fit:contain;vertical-align:middle;flex-shrink:0"></span><span>Módulo do Professor</span></button>
     <a class="ae-btn ae-ghost" href="./" style="align-self:center">← Operações de sala</a>
   </div>
   <p class="ae-muted" style="margin-top:18px;font-size:11.5px;text-align:center">Simuladores interativos utilizados nas disciplinas de Fisiologia Humana do Prof. Dr. Mário César Nascimento ©</p>
@@ -404,8 +404,8 @@ function painel() {
     </div>
   </div>
   <div class="ae-placar">
-    <div class="ae-pl aberto"><b id="aeAbertos">0</b><span>🔓 Cadeados abertos</span></div>
-    <div class="ae-pl fechado"><b id="aeFechados">0</b><span>🔒 Cadeados fechados</span></div>
+    <div class="ae-pl aberto"><b id="aeAbertos">0</b><span><img src="../assets/icons/locks/open-blue.png" alt="" aria-hidden="true" style="display:inline-block;width:1.7em;height:1.7em;max-width:none;object-fit:contain;vertical-align:middle;flex-shrink:0"> Cadeados abertos</span></div>
+    <div class="ae-pl fechado"><b id="aeFechados">0</b><span><img src="../assets/icons/locks/closed-blue.png" alt="" aria-hidden="true" style="display:inline-block;width:1.7em;height:1.7em;max-width:none;object-fit:contain;vertical-align:middle;flex-shrink:0"> Cadeados fechados</span></div>
     <div class="ae-pl"><b id="aeConcluiram">0</b><span>🏆 Equipes concluíram</span></div>
   </div>
   <div class="ae-barra" title="Cadeados abertos na partida"><i id="aeBarra" style="width:0%"></i></div>
@@ -420,7 +420,7 @@ function painel() {
 
 const ROTULO = { aguardando: 'Aguardando', andamento: 'Em andamento', falhou: 'Cadeado fechado', concluiu: 'Concluiu' };
 function atualizarPainel() {
-  const b = $('aeSalaBtn'); if (b && role === 'mestre') b.textContent = '🔒 Painel · ' + code;
+  const b = $('aeSalaBtn'); if (b && role === 'mestre') b.replaceChildren(Object.assign(document.createElement('img'), { src: '../assets/icons/locks/closed-blue.png', alt: '', width: 32, height: 32 }), document.createTextNode(' Painel · ' + code));
   const p = placar();
   const set = (id, v) => { const el = $(id); if (el) el.textContent = v; };
   set('aeContagem', `${equipes.length} equipe${equipes.length === 1 ? '' : 's'} · ao vivo`);
@@ -431,7 +431,7 @@ function atualizarPainel() {
   g.innerHTML = equipes.length ? equipes.map((e, i) => {
     const st = ['andamento', 'concluiu', 'falhou'].includes(e.status) ? e.status : 'entrou';
     const fase = Math.min(CADEADOS, e.fase || 0);
-    const cad = '🔓'.repeat(fase) + '🔒'.repeat(CADEADOS - fase);
+    const cad = '<img src="../assets/icons/locks/open-blue.png" alt="" aria-hidden="true" style="display:inline-block;width:1.7em;height:1.7em;max-width:none;object-fit:contain;vertical-align:middle;flex-shrink:0">'.repeat(fase) + '<img src="../assets/icons/locks/closed-blue.png" alt="" aria-hidden="true" style="display:inline-block;width:1.7em;height:1.7em;max-width:none;object-fit:contain;vertical-align:middle;flex-shrink:0">'.repeat(CADEADOS - fase);
     const ph = e.status === 'aguardando' || !e.status ? 'Aguardando início' : [e.casoTitulo, ROTULO[e.status]].filter(Boolean).join(' · ');
     return `<button type="button" class="ae-eq st-${st}" data-i="${i}"><div class="av">${esc(e.avatar || '👥')}</div><div class="nm">${esc(e.nome || 'Equipe')}</div><div class="ph">${esc(ph)}</div><div class="sc" aria-label="${fase} de ${CADEADOS} cadeados abertos">${cad}</div></button>`;
   }).join('') : '<div class="ae-vazia">Nenhuma equipe na sala ainda.<br><span style="font-size:13px;opacity:.8">Os cartões aparecem quando alguém entra com o código.</span></div>';
@@ -510,7 +510,7 @@ function instalarBotao(erroEnvio = false) {
   let b = $('aeSalaBtn');
   if (!b) { b = document.createElement('button'); b.id = 'aeSalaBtn'; b.type = 'button'; document.body.appendChild(b); }
   b.classList.toggle('erro', erroEnvio);
-  if (role === 'mestre') { b.textContent = '🔒 Painel · ' + code; b.onclick = painel; }
+  if (role === 'mestre') { b.replaceChildren(Object.assign(document.createElement('img'), { src: '../assets/icons/locks/closed-blue.png', alt: '', width: 32, height: 32 }), document.createTextNode(' Painel · ' + code)); b.onclick = painel; }
   else b.onclick = () => alert(erroEnvio ? 'O progresso não chegou ao professor. Confira a internet; o próximo passo tenta de novo.' : 'Sala ' + code);
   return b;
 }
