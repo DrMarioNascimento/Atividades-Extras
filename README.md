@@ -1,12 +1,20 @@
 # Atividades Extras
 
-## Situação atual — 19 de outubro de 2026
+## Disponibilidade e novidades — 24 de outubro de 2026
+
+**Atividades de turma, com participação por código**. Os sete laboratórios de Fisiologia usam o acesso compartilhado em `fisiologia/sala-firebase.js`: a criação de salas exige uma conta Google autorizada em `config/mestres`; equipes entram com o código fornecido pelo professor. A apresentação pública não libera a criação de salas para qualquer conta.
+
+Os simuladores individuais públicos estão no [portal de Fisiologia](https://fisiologia.drmarionascimento.com.br/). Ética e Pesquisa continuam propostas neste repositório, sem novas pastas implementadas.
+
+[Ver todos os recursos públicos](https://www.drmarionascimento.com.br/#acesso-publico). O acesso respeita [LICENSE.md](LICENSE.md).
+
+## Contexto técnico — registro de 19 de outubro de 2026
 
 As missões implementadas continuam em `fisiologia/`; Ética e Pesquisa são frentes propostas. Os sete laboratórios compartilham o acesso de sala em `fisiologia/sala-firebase.js`. A unidade endócrina adicionada à Fisiologia Interativa não implica que uma missão endócrina já exista aqui. O domínio oficial está em [CNAME](CNAME).
 
 ## Recursos educacionais
 
-Este projeto integra os recursos educacionais do Prof. Mário César Nascimento, PhD. O acesso aos materiais disponibilizados permanece aberto ao público, conforme [LICENSE.md](LICENSE.md). Recursos de Fisiologia têm finalidade educacional e não substituem diagnóstico, prescrição nem orientação clínica individual.
+Este projeto integra os recursos educacionais do Prof. Mário César Nascimento, PhD. A apresentação é pública e a participação nas salas depende do convite do professor, conforme [LICENSE.md](LICENSE.md). Recursos de Fisiologia têm finalidade educacional e não substituem diagnóstico, prescrição nem orientação clínica individual.
 
 Portal do autor: https://www.drmarionascimento.com.br/
 
@@ -54,7 +62,7 @@ Vitrine: [atividades-extras.drmarionascimento.com.br/fisiologia/](https://ativid
 
 As versões avulsas (`com-cronometro`, `sem-cronometro` e a versão simples) continuam na pasta para não quebrar links e QR antigos. `Operacao-Membrana-Sitiada*.html` é uma versão anterior, fora da vitrine. Missões novas desta matéria entram em `fisiologia/`. Outra disciplina = pasta nova no mesmo nível (`etica/`, `pesquisa/`…).
 
-Relacionados: [Fisiologia Interativa](https://github.com/DrMarioNascimento/fisiologia-interativa), [Fisiologia em Fuga](https://github.com/DrMarioNascimento/fisiologia-em-fuga) e [Eita!](https://eita.dragongames.dev.br/) (quiz-batalha, em testes internos).
+Relacionados: [Fisiologia Interativa](https://github.com/DrMarioNascimento/fisiologia-interativa), [Fisiologia em Fuga](https://github.com/DrMarioNascimento/fisiologia-em-fuga) e [Eita!](https://eita.dragongames.dev.br/) (quiz-batalha, em testes abertos).
 
 ## Salas com QR (Firebase)
 

@@ -58,3 +58,13 @@ https://www.drmarionascimento.com.br/
 O escopo implementado permanece nas missões de Fisiologia. Referências a Ética, Pesquisa ou a novas unidades em outros projetos não declaram a existência de atividades equivalentes neste repositório.
 
 Esta revisão atualiza a identificação e o escopo documental. Preserva os titulares, as permissões e as restrições existentes. Não substitui nem restringe as licenças próprias de componentes de terceiros.
+
+## Escopo e disponibilidade — 24 de outubro de 2026
+
+As sete missões de Fisiologia mantêm condução por conta Google autorizada e participação por código de sala. A apresentação pública não amplia permissões nem libera controles docentes.
+
+Esta revisão documenta o escopo e a disponibilidade atuais; preserva os titulares, as permissões e as restrições existentes, inclusive os direitos e licenças próprios de terceiros. Acesso público não equivale a licença de código aberto.
+
+Inventário de acessos: https://www.drmarionascimento.com.br/#acesso-publico
+
+**English — scope and availability, October 24, 2026:** The seven physiology labs retain authorized Google hosts and room-code participation; public presentation does not broaden permissions. Existing ownership, grants, restrictions and third-party terms are preserved; public access does not mean open source.
