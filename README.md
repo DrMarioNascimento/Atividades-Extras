@@ -1,5 +1,8 @@
 # Atividades Extras
 
+> **ÁREA DE CONDUÇÃO DOCENTE:** acesso Google para professores autorizados; alunos participam por código/QR de sala, sem login Google docente. **Não confundir com [Fisiologia em Fuga](https://github.com/DrMarioNascimento/fisiologia-em-fuga)**, cujo acesso é público sem Google para EF, Fisioterapia e Percursos de Fisiologia. Agentes de IA: ler [AGENTS.md](AGENTS.md) antes de alterar controles.
+
+
 ## Disponibilidade e novidades — 24 de outubro de 2026
 
 **Atividades de turma, com participação por código**. Os sete laboratórios de Fisiologia usam o acesso compartilhado em `fisiologia/sala-firebase.js`: a criação de salas exige uma conta Google autorizada em `config/mestres`; equipes entram com o código fornecido pelo professor. A apresentação pública não libera a criação de salas para qualquer conta.
