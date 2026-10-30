@@ -11,11 +11,11 @@
   const style = document.createElement('style');
   style.id = 'acesso-qr-estilo';
   style.textContent = `
-    [data-qr-intro]{display:grid;grid-template-columns:minmax(0,1fr) 116px;align-items:center;gap:24px;margin-bottom:20px}
+    [data-qr-intro]{display:grid;grid-template-columns:minmax(0,1fr) 96px;align-items:center;gap:24px;margin-bottom:20px}
     [data-qr-copy]{min-width:0}
     [data-acesso-qr-slot]{display:flex;align-items:center;justify-content:center;min-width:0}
-    [data-qr-compact]{grid-template-columns:minmax(0,1fr) 96px;gap:12px}
-    @media(min-width:901px){.intro-banner[data-qr-banner]{grid-template-columns:124px minmax(0,1fr) 150px 116px;gap:22px}}
+    [data-qr-compact]{grid-template-columns:minmax(0,1fr) 88px;gap:12px}
+    @media(min-width:901px){.intro-banner[data-qr-banner]{grid-template-columns:124px minmax(0,1fr) 150px 96px;gap:22px}}
     @media(max-width:900px){[data-qr-banner]>[data-acesso-qr-slot]{grid-column:1/-1;justify-content:flex-start}}
     @media(max-width:760px){[data-qr-intro]{grid-template-columns:minmax(0,1fr);gap:14px}[data-qr-intro]>[data-acesso-qr-slot]{justify-content:flex-start}}
   `;
@@ -25,16 +25,17 @@
   const root = host.attachShadow({mode:'open'});
   root.innerHTML = `
     <style>
-      :host{display:block;width:116px;max-width:100%;font:11px/1.3 system-ui,sans-serif;color-scheme:light}
+      :host{display:block;width:96px;max-width:100%;color-scheme:light}
       *{box-sizing:border-box}
-      a{display:block;padding:4px 4px 7px;border:1px solid #d8dfdd;border-radius:10px;background:#fff;color:#334741;text-align:center;text-decoration:none;box-shadow:0 2px 8px #0002}
+      a{display:block;padding:0;border:0;border-radius:2px;background:transparent;text-decoration:none;box-shadow:none}
       a:focus-visible{outline:3px solid #167151;outline-offset:3px}
-      img{display:block;width:100%;height:auto;aspect-ratio:1;background:#fff}
-      span{display:block;margin-top:2px;font-size:11px;white-space:nowrap}
-      :host([compact]){width:96px}:host([compact]) span{font-size:9px}
-      @media(max-width:760px){:host{width:104px}:host([compact]){width:96px}span{font-size:10px}}
+      img{display:block;width:100%;height:auto;aspect-ratio:1;border-radius:2px;opacity:.92}
+      a:hover img,a:focus-visible img{opacity:1}
+      :host([compact]){width:88px}
+      @media(max-width:760px){:host{width:88px}}
+      @media print{img{opacity:1}}
     </style>
-    <a><img width="106" height="106"><span>Abra no celular</span></a>`;
+    <a><img width="96" height="96"></a>`;
   const link = root.querySelector('a');
   link.href = url;
   link.title = title || 'Acesso direto';
