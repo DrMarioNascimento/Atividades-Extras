@@ -39,18 +39,21 @@ body.locked main{visibility:hidden}
 <body class="locked">
 <div id="gate">
   <form class="gate-box" id="gate-form" autocomplete="off">
-    <p class="eyebrow">Área restrita · Fisiologia</p>
+    <div data-qr-intro data-qr-compact><div data-qr-copy><p class="eyebrow">Área restrita · Fisiologia</p>
     <h2>Validação de acesso</h2>
     <p>Informe a senha da disciplina para abrir as operações de sala organizadas por unidade.</p>
+    </div><div data-acesso-qr-slot></div></div>
     <input id="gate-pass" type="password" placeholder="Senha" autofocus>
     <p class="gate-err" id="gate-err"></p>
     <button class="btn" type="submit">Entrar</button>
   </form>
 </div>
 <main>
+<div data-qr-intro><div data-qr-copy>
 <p class="eyebrow"><a href="../" style="color:inherit;text-decoration:none">Atividades extras</a> · Fisiologia</p>
 <h1>Operações de <span>sala</span></h1>
 <p class="lead">Mesma estrutura de unidades da Fisiologia Interativa. Todos os laboratórios trazem casos clínicos, esportivos e de inclusão, com cronômetro opcional na própria tela.</p>
+</div><div data-acesso-qr-slot></div></div>
 <div class="units">
 <section class="unit" id="unidade-1">
   <div class="unit-head"><div class="unit-num">1</div><div><p class="eyebrow">Unidade 1</p><h2>Fisiologia celular, transporte de substâncias e potenciais de ação</h2><p>Gradientes, GLUT4, osmolaridade, limiar e cinética de canais.</p></div></div>
@@ -119,6 +122,6 @@ form.addEventListener('submit', (ev) => {
 });
 document.getElementById('sair').addEventListener('click', lock);
 </script>
-<script defer src="../acesso-qr.js?v=20261030-qr-fixo" data-title="Fisiologia · Atividades Extras" data-url="https://atividades-extras.drmarionascimento.com.br/fisiologia/" data-image="assets/qr/fisiologia-extra.svg"></script>
+<script defer src="../acesso-qr.js?v=20261030-cabecalho" data-title="Fisiologia · Atividades Extras" data-url="https://atividades-extras.drmarionascimento.com.br/fisiologia/" data-image="assets/qr/fisiologia-extra.svg"></script>
 </body>
 </html>
